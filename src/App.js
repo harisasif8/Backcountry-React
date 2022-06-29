@@ -11,13 +11,15 @@ import { useEffect } from 'react';
 function App() {
 
   // useEffect()
-  
+
   return (
     <Router>
       <div>
         <Header />
         <Routes>
           <Route exact path="/products"
+            element={<ProductListing />} />
+          <Route exact path="/"
             element={<ProductListing />} />
         </Routes>
       </div>

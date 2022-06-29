@@ -24,6 +24,8 @@
     height: 40%;
 }
 
+
+
 .product-images {
     width: 100%;
     height: auto;
@@ -46,11 +48,12 @@ h6 {
 
 .brand{
     margin-top: 5%;
+    height: 50px;
 
 }
 
 .title {
-    margin-top: 5%;
+    margin-top: 10%;
 }
 
 .price {
@@ -94,8 +97,10 @@ h6 {
 }
 
 
-
-
+.loader{
+    margin-top: 5%;
+    width: 400%;
+}
 
 @media(max-width: 320px) {
 
