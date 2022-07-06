@@ -1,62 +1,57 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { ShimmerPostList } from "react-shimmer-effects";
-import fetcher from './utils';
-import products from './products';
+import Product from './Product';
+import { ProductContext } from './ProductContext'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import UseDebounce from './../hooks/UseDebounce'
 
 const ProductListing = () => {
-    const [bcData, setBcData] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [{ products, isProductLoading }] = useContext(ProductContext);
+    const [filteredProducts, setFilteredProducts] = useState([]);
+    const [searchText, setSearchText] = useState('');
+    
+    const debouncedText = UseDebounce(searchText, 500).toLowerCase();
+    // const debouncedText = <UseDebounce searchText={searchText} delay={500} />
 
-    useEffect(() => {
-        const getData = async () => {
-            try {
-                const response = await fetcher({
-                    url: process.env.REACT_APP_PRODUCTS,
-                    method: 'GET'
-                })
-                setBcData(response.data.products)
-            } catch (err) {
-                console.log(err);
-            } finally {
-                setLoading(false);
-            }
-        };
 
-        getData();
-    }, []);
+    useEffect(
+        () => {
+            const searchItem = () => {
+                const filteredBcProducts = debouncedText ? products.filter((product) => {
+                    const { brand: { name: brandName }, title: productTitle } = product;
+                    return (
+                        brandName.toLowerCase().includes(debouncedText) || productTitle.toLowerCase().includes(debouncedText)
+                    );
+                }) : products;
+
+                setFilteredProducts(filteredBcProducts)
+            };
+
+            searchItem()
+
+        }, [debouncedText, products]
+    );
 
     return (
-        <div className="grid-container" id='productsListing'>
-            {
-                // bcData.map((product) => (
-                //     <div className="grid-item" key={product.title}>
-                //         <div className="card">
-                //             <img src={`https://www.backcountry.com${product.productMainImage.mediumImg}`} alt="Avatar" className='product-images animate' />
-                //             <div className="container">
-                //                 <h6 className='brand animate'>{product.title}</h6>
-                //                 <p className='title animate'>{product.brand.name}</p>
-                //                 <p className='price animate'>{`$${product.activePrice.maxListPrice}`}</p>
-                //                 <p className='reviews animate'>
-                //                     {Array.apply(null, { length: product.customerReviews.average }).map((rating, ratingIndex) => (
+        <>
+            <form action="" className='search-bar' >
+                <div className="input-icons">
+                    <span type='button' > <i><FontAwesomeIcon icon={faSearch} className='search-icon' /> </i></span>
+                    <input type="searchbar" className='search-box' placeholder="Search gear & apparel" id='searchBar' onChange={(e) => setSearchText(e.target.value)} />
+                </div>
+            </form>
+            <div className="grid-container" id='productsListing'>
+                {
+                    filteredProducts.map((product) => <Product product={product} key={product.id} />)
+                }
 
-                //                         <i key={`${product.title}-rating-${ratingIndex}`} ><FontAwesomeIcon icon={faStar} /></i>)
-                //                     )}
-                //                 </p>
-                //                 <button className='cart-button button animate'>Add To Cart</button>
-                //             </div>
-                //         </div>
-                //     </div>
-                // ))
-
-                bcData.map((product) => (
-                    products(product)
-                ))
-            }
-
-            {loading && <ShimmerPostList postStyle="STYLE_EIGHT" col={4} row={4} gap={30} className='loader' />}
-        </div>
+                {isProductLoading && <ShimmerPostList col={4} row={4} gap={30} className='loader' />}
+            </div>
+        </>
     );
+
+
 }
 
 export default ProductListing;

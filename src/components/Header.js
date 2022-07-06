@@ -1,10 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from '../assets/images/header/backcountrylogo.jpeg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faComments, faPhone, faUserCircle, faShoppingCart } from '@fortawesome/free-solid-svg-icons'
+import { useNavigate } from 'react-router-dom';
 
 
 const Header = () => {
+    const [searchValue, setSearchValue] = useState('');
+    const [searchInputValue, setSearchInputValue] = useState(searchValue)
+    const navigate = useNavigate();
+
+console.log(searchInputValue);
+
+    const searchProduct = (event) => {
+        event.preventDefault();
+        setSearchInputValue(searchInputValue)
+        navigate(`products?search=${searchValue}`);
+    }
+
     return (
         <div>
             <header>
@@ -13,10 +26,10 @@ const Header = () => {
                     <div>
                         <img src={logo} className='bc-logo' alt="" />
                     </div>
-                    <form action="" className='search-bar'>
+                    <form action="" className='search-bar' onSubmit={searchProduct}>
                         <div className="input-icons">
-                            <span type='button'> <i><FontAwesomeIcon icon={faSearch} className='search-icon' /> </i></span>
-                            <input type="searchbar" className='search-box' placeholder="Search gear & apparel" />
+                            <span type='button' > <i><FontAwesomeIcon icon={faSearch} className='search-icon' /> </i></span>
+                            <input onChange={(e) => setSearchValue(e.target.value)} type="searchbar" className='search-box' placeholder="Search gear & apparel" id='searchBar' />
                         </div>
                     </form>
                     <div>
