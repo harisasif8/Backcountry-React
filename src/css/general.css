@@ -20,7 +20,7 @@
 .main-nav {
     display: flex;
     display: grid;
-    grid-template-columns: 15% 35% 10% 20% 10% 10% ;
+    grid-template-columns: 15% 35% 10% 20% 10% 10%;
 }
 
 .search-bar {
@@ -41,8 +41,31 @@
 
 }
 
+.ui-search-input {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: black;
+    height: 40px;
+    width: 30%;
+    font-size: medium;
+    border: none;
+    padding-left: .5%;
+    border-radius: 0.5em;
+    border: 3px solid black;
+}
+
+.cart-img{
+width: 60%;
+
+}
+
 .search-bar ::placeholder {
     color: white;
+    font-size: medium;
+    font-weight: bolder;
+}
+
+.ui-search-input::placeholder {
+    color: gray;
     font-size: medium;
     font-weight: bolder;
 }
@@ -56,10 +79,26 @@
 
 }
 
+
+
 .input-icons i {
     position: absolute;
     margin-top: 4px;
 }
+
+.ui-search-box {
+    text-align: center;
+}
+
+.ui-search-box i {
+    position: relative;
+    /* margin-left: 24%; */
+
+}
+
+
+
+
 
 .icon-btn {
     background-color: white;
@@ -68,17 +107,18 @@
     font-size: 16px;
     cursor: pointer;
     margin-top: 50px;
-    
+
 }
 
-.cart-icon{
+.cart-icon {
     margin-left: 40px;
 }
+
 hr {
     border-top: 1px solid rgba(7, 7, 7, 0.469);
 }
 
-.category-div{
+.category-div {
     margin-left: 30px;
     margin-top: 30px;
     margin-bottom: 30px;
@@ -92,7 +132,7 @@ hr {
     font-weight: bold;
 }
 
-.categories-red{
+.categories-red {
     color: red;
     text-decoration: none;
     margin-left: 40px;
@@ -107,12 +147,22 @@ hr {
     font-weight: bold;
 }
 
-.yakima-text{
+.yakima-text {
     margin-left: 120px;
 
 }
-.text{
+
+.text {
     margin-top: 10px;
+}
+
+.add-cart-button{
+    color: gray;
+    background-color: white;
+    font-weight: bolder;
+    font-size: 18px;
+    margin-top: 5px;
+    text-decoration: underline;
 }
 
 
@@ -124,18 +174,19 @@ hr {
         /* margin-left: 120px; */
         /* margin-right: 120px; */
         display: grid;
-        grid-template-columns: 100% ;
+        grid-template-columns: 100%;
     }
 
-    .cart-icon{
+    .cart-icon {
         margin-left: 0px;
     }
 
-    .yakima-text{
+    .yakima-text {
         margin-left: 12px;
-    
+
     }
-    .text{
+
+    .text {
         margin-top: 10px;
     }
 
@@ -146,11 +197,11 @@ hr {
     .main-nav {
         display: flex;
         display: grid;
-        grid-template-columns: 100% ;
+        grid-template-columns: 100%;
 
     }
 
-    .cart-icon{
+    .cart-icon {
         margin-left: 0px;
     }
 
@@ -159,33 +210,34 @@ hr {
         font-size: 2%;
     }
 
-    .categories-red{
+    .categories-red {
         margin-left: 10px;
         font-size: 2%;
     }
 
-    .category-div{
+    .category-div {
         margin: 10px 5px 15px 0;
     }
 
-    .yakima-text{
+    .yakima-text {
         margin-left: 12px;
-    
+
     }
-    .text{
+
+    .text {
         margin-top: 10px;
     }
 
 }
 
-@media only screen and ( min-width: 539px) and (max-width:541px) {
+@media only screen and (min-width: 539px) and (max-width:541px) {
 
     .main-nav {
         display: flex;
         /* margin-left: 120px; */
         /* margin-right: 120px; */
         display: grid;
-        grid-template-columns: 100% ;
+        grid-template-columns: 100%;
 
     }
 
@@ -194,45 +246,47 @@ hr {
         font-size: 2%;
     }
 
-    .categories-red{
+    .categories-red {
         margin-left: 10px;
         font-size: 2%;
     }
 
-    .category-div{
+    .category-div {
         margin: 10px 5px 15px 0;
     }
 
-    .yakima-text{
+    .yakima-text {
         margin-left: 12px;
-    
+
     }
-    .text{
+
+    .text {
         margin-top: 10px;
     }
 
 }
 
-@media only screen and ( min-width: 750px) and (max-width:821px){
+@media only screen and (min-width: 750px) and (max-width:821px) {
     .categories {
         margin-left: 2%;
         font-size: 90%;
     }
 
-    .categories-red{
+    .categories-red {
         margin-left: 10px;
         font-size: 90%;
     }
 
-    .category-div{
+    .category-div {
         margin: 20px 10px 20px 0;
     }
 
-    .yakima-text{
+    .yakima-text {
         margin-left: 12px;
-    
+
     }
-    .text{
+
+    .text {
         margin-top: 10px;
     }
 }

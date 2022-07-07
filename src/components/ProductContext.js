@@ -1,12 +1,8 @@
-import React, { useState, createContext, useEffect, useMemo } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useState, createContext, useEffect } from 'react';
 import fetcher from './../utils/index';
+import UseQuery from '../hooks/UseQuery';
 
 
-const useQuery = () => {
-    const { search } = useLocation();
-    return useMemo(() => new URLSearchParams(search), [search]);
-}
 
 export const ProductContext = createContext();
 
@@ -16,19 +12,19 @@ export const ProductProvider = props => {
         isProductLoading: true
     });
 
-    const query = useQuery();
+    const query = UseQuery();
     const searchTerm = query.get('search');
+
 
     useEffect(() => {
         const getData = async () => {
             try {
                 const response = await fetcher({
-                    url: `${process.env.REACT_APP_PRODUCTS}/${searchTerm}`,
+                    url: `${process.env.REACT_APP_PRODUCTS}/${searchTerm ? searchTerm : null}`,
                     method: 'GET',
                     params: {
-                        ...(searchTerm ? { q: searchTerm } : {})
+                        ...(searchTerm ? { q: searchTerm } : { q: '' })
                     }
-
                 });
 
                 setProductData({ isProductLoading: false, products: response?.data?.products || [] })

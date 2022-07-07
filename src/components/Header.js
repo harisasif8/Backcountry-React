@@ -1,20 +1,23 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import logo from '../assets/images/header/backcountrylogo.jpeg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faComments, faPhone, faUserCircle, faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom';
+import UseQuery from '../hooks/UseQuery';
 
 
 const Header = () => {
-    const [searchValue, setSearchValue] = useState('');
-    const [searchInputValue, setSearchInputValue] = useState(searchValue)
+
+    const query = UseQuery();
+    const searchTerm = query.get('search');
+    
+    const [searchValue, setSearchValue] = useState(searchTerm);
     const navigate = useNavigate();
 
-console.log(searchInputValue);
 
     const searchProduct = (event) => {
         event.preventDefault();
-        setSearchInputValue(searchInputValue)
+        setSearchValue(searchValue)
         navigate(`products?search=${searchValue}`);
     }
 
@@ -29,7 +32,7 @@ console.log(searchInputValue);
                     <form action="" className='search-bar' onSubmit={searchProduct}>
                         <div className="input-icons">
                             <span type='button' > <i><FontAwesomeIcon icon={faSearch} className='search-icon' /> </i></span>
-                            <input onChange={(e) => setSearchValue(e.target.value)} type="searchbar" className='search-box' placeholder="Search gear & apparel" id='searchBar' />
+                            <input onChange={(e) => setSearchValue(e.target.value)} type="searchbar" className='search-box' placeholder="Search gear & apparel" id='searchBar' defaultValue={searchValue} />
                         </div>
                     </form>
                     <div>
