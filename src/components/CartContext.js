@@ -1,12 +1,11 @@
-import { useState, createContext } from 'react';
+import { useState, createContext, useEffect } from 'react';
 
 
-export const cartContext = createContext();
-const cart = 'Cart'
+export const CartContext = createContext();
+export const CART = 'Cart'
 
 
-
-export const cartProvider = props => {
+export const CartProvider = props => {
     const [cartData, setCartData] = useState({
         id: '',
         price: '',
@@ -14,22 +13,21 @@ export const cartProvider = props => {
     }
     )
 
-    const getDataFromLS = () => {
-        const cartItem = localStorage.getItem(cart) || '[]';
-        const parsedCartItem = JSON.parse(cartItem);
-        parsedCartItem.push(cartData);
-
-        localStorage.setItem(cart, JSON.stringify(parsedCartItem));
-
-
-    }
-    getDataFromLS()
+    useEffect(() => {
+        const getDataFromLS = () => {
+            const cartItem = localStorage.getItem(CART) || [];
+            const parsedCartItem = JSON.parse(cartItem);
+            parsedCartItem.push(cartData);
+            localStorage.setItem(CART, JSON.stringify(parsedCartItem));
+        }
+        getDataFromLS()
+    }, [cartData])
 
 
     return (
-        <cartContext.Provider value={[cartData, setCartData]}>
+        <CartContext.Provider value={[cartData, setCartData]}>
             {props.children}
-        </cartContext.Provider>
+        </CartContext.Provider>
     );
 
 }

@@ -53,10 +53,7 @@
     border: 3px solid black;
 }
 
-.cart-img{
-width: 60%;
 
-}
 
 .search-bar ::placeholder {
     color: white;
@@ -87,13 +84,12 @@ width: 60%;
 }
 
 .ui-search-box {
-    text-align: center;
+    margin-left: 2%;
+    margin-top: 1%;
 }
 
 .ui-search-box i {
     position: relative;
-    /* margin-left: 24%; */
-
 }
 
 
@@ -156,7 +152,7 @@ hr {
     margin-top: 10px;
 }
 
-.add-cart-button{
+.add-cart-button {
     color: gray;
     background-color: white;
     font-weight: bolder;

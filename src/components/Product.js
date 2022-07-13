@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { Drawer } from 'rsuite'
@@ -6,29 +6,45 @@ import { Drawer } from 'rsuite'
 
 
 const Product = ({ product }) => {
-    const [isDrawerOpen, setIsDrawerOpen] = React.useState(false)
+    const addToCart = 'Add To Cart';
+    const removeFromCart = 'Remove From Cart';
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+    const [cartBtnText, setCartBtnText] = useState(addToCart)
 
     const closeDrawer = () => {
         setIsDrawerOpen(false);
     }
 
+    const removeFromCartBtn = (event) => {
+        if (event.target.value === addToCart) {
+            setCartBtnText(removeFromCart)
+            setIsDrawerOpen(true);
+        }
+        else if (event.target.value === removeFromCart) {
+            setCartBtnText(addToCart)
+            setIsDrawerOpen(false);
+        }
 
+    }
+    
 
+    const { title: productTitle, brand: { name: BrandName }, activePrice: { maxListPrice: productPrice }, customerReviews: reviews, productMainImage: { mediumImg: productImage } } = product;
 
     return (
-        <div className="grid-item" key={product.title}>
+        <div className="grid-item" key={productTitle}>
             <div className="card">
-                <img src={`https://www.backcountry.com${product.productMainImage.mediumImg}`} alt="Avatar" className='product-images ' />
+                <img src={`https://www.backcountry.com${productImage}`} alt="Avatar" className='product-images ' />
                 <div className="container">
-                    <h6 className='brand '>{product.title}</h6>
-                    <p className='title '>{product.brand.name}</p>
-                    <p className='price '>{`$${product.activePrice.maxListPrice}`}</p>
+                    <h6 className='brand '>{productTitle}</h6>
+                    <p className='title '>{BrandName}</p>
+                    <p className='price '>{`$${productPrice}`}</p>
                     <p className='reviews '>
-                        {Array.apply(null, { length: product.customerReviews.average }).map((rating, ratingIndex) => (
+                        {Array.apply(null, { length: reviews.average }).map((rating, ratingIndex) => (
                             <i key={`${product.title}-rating-${ratingIndex}`} ><FontAwesomeIcon icon={faStar} /></i>)
                         )}
                     </p>
-                    <button onClick={() => { setIsDrawerOpen(true); }} className='cart-button' id='cart-btn'>Add To Cart</button>
+                    <input type = 'button' onClick={(event) => removeFromCartBtn(event)} className='cart-button' id='cart-btn' value={cartBtnText}></input>
+
                     <Drawer
                         placement="right"
                         size="sm"
@@ -39,16 +55,17 @@ const Product = ({ product }) => {
                         <Drawer.Header>
                             <Drawer.Title> <h3>Cart</h3> </Drawer.Title>
                         </Drawer.Header>
-                        <Drawer.Body>
-                            <img src={`https://www.backcountry.com${product.productMainImage.mediumImg}`} alt="Avatar" className='cart-img' />
-                            <h6>{product.title}</h6>
-                            <h6>Quantity: 1</h6>
-                            <h6>{`Color: ${product.productMainImage.name}`}</h6>
-                            <h6>{`Price : $${product.activePrice.maxListPrice}`}</h6>
-
-                            <button className='add-cart-button'>Remove</button>
-
-
+                        <Drawer.Body className='cart-card'>
+                            <div className='cart-img'>
+                                <img src={`https://www.backcountry.com${productImage}`} alt="Avatar" className='cart-product-img' />
+                            </div>
+                            <div className='cart-info'>
+                                <h6>{productTitle}</h6>
+                                <h6>Quantity: 1</h6>
+                                <h6>{`Color: ${BrandName}`}</h6>
+                                <h6>{`Price : $${productPrice}`}</h6>
+                                <button className='add-cart-button'>Remove</button>
+                            </div>
                         </Drawer.Body>
                     </Drawer>
                 </div>

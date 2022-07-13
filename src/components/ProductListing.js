@@ -6,8 +6,6 @@ import UseDebounce from './../hooks/UseDebounce'
 import UseQuery from '../hooks/UseQuery';
 
 
-
-
 const ProductListing = () => {
     const [{ products, isProductLoading }] = useContext(ProductContext);
     const [filteredProducts, setFilteredProducts] = useState([]);
