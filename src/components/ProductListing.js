@@ -42,9 +42,8 @@ const ProductListing = () => {
                 <input type="searchbar" className='ui-search-input' placeholder={`Search ${searchTerm}`} id='searchBar' onChange={(e) => setSearchText(e.target.value)} />
             </div>
             <div className="grid-container" id='productsListing'>
-                {
-                    filteredProducts.map((product) => <Product product={product} key={product.id} />)
-                }
+                {filteredProducts.map((product) => <Product product={product} key={product.id} />)}
+                
                 {isProductLoading && <ShimmerPostList col={4} row={4} gap={30} className='loader' />}
             </div>
         </>

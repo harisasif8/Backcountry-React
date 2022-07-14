@@ -28,7 +28,6 @@ export const ProductProvider = props => {
                 });
 
                 setProductData({ isProductLoading: false, products: response?.data?.products || [] })
-                console.log(response.data.products.length++);
             } catch (err) {
                 setProductData({ ...productData, isProductLoading: false })
             }
