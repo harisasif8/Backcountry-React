@@ -4,12 +4,20 @@ import Product from './Product';
 import { ProductContext } from './ProductContext'
 import UseDebounce from './../hooks/UseDebounce'
 import UseQuery from '../hooks/UseQuery';
+import CartDrawer from './cartDrawer';
+import { CartContext, CART } from './CartContext';
+
 
 
 const ProductListing = () => {
     const [{ products, isProductLoading }] = useContext(ProductContext);
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [searchText, setSearchText] = useState('');
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+    const [cartData, setCartData] = useContext(CartContext)
+
+
+
 
     const debouncedText = UseDebounce(searchText, 500).toLowerCase();
 
@@ -35,16 +43,15 @@ const ProductListing = () => {
         }, [debouncedText, products]
     );
 
-
     return (
         <>
             <div className="ui-search-box">
                 <input type="searchbar" className='ui-search-input' placeholder={`Search ${searchTerm}`} id='searchBar' onChange={(e) => setSearchText(e.target.value)} />
             </div>
             <div className="grid-container" id='productsListing'>
-                {filteredProducts.map((product) => <Product product={product} key={product.id} />)}
-                
-                {isProductLoading && <ShimmerPostList col={4} row={4} gap={30} className='loader' />}
+                {isProductLoading ? <ShimmerPostList col={4} row={4} gap={30} className='loader' /> : filteredProducts.map((product) => <Product product={product} key={product.id} onDrawerOpen={setIsDrawerOpen} />)}
+
+                {isDrawerOpen && <CartDrawer isDrawerOpen={isDrawerOpen} onDrawerClose={setIsDrawerOpen} />}
             </div>
         </>
     );

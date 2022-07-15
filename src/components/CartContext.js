@@ -6,8 +6,7 @@ export const CART = 'Cart'
 
 
 export const CartProvider = props => {
-    const [cartData, setCartData] = useState({}
-    )
+    const [cartData, setCartData] = useState({})
 
     const getDataFromLS = () => {
         const cartItem = localStorage.getItem(CART) || '[]';
