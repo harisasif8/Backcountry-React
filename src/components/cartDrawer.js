@@ -1,12 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { ProductContext } from './ProductContext'
 import { Drawer } from 'rsuite'
-import { CartContext, CART } from './CartContext';
-
-
-
-
-
+import { CartContext } from './CartContext';
 
 const CartDrawer = ({ isDrawerOpen, onDrawerClose }) => {
 
@@ -16,24 +11,12 @@ const CartDrawer = ({ isDrawerOpen, onDrawerClose }) => {
     const [filteredCartProduct, setFilteredCartProduct] = useState([]);
 
     useEffect(() => {
-        console.log('heressss');
-
         const items = products.filter((cartProductId) =>
             cartData.find((cartId) => cartProductId.id === cartId.id)
-
         )
-
         setFilteredCartProduct([...items])
-        //operation
-        // setFilteredCartProduct([...abc])
+
     }, [cartData]);
-
-    // const closeDrawer = () => {
-    //     setIsDrawerOpen(false);
-    // }
-
-    // const { title: productTitle, activePrice: { maxListPrice: productPrice }, customerReviews: reviews, productMainImage: { mediumImg: productImage } } = products;
-
 
     return (
         <Drawer

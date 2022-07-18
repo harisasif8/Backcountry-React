@@ -6,12 +6,7 @@ export const CART = 'Cart'
 
 
 export const CartProvider = props => {
-<<<<<<< Updated upstream
-    const [cartData, setCartData] = useState({}
-    )
-=======
     const [cartData, setCartData] = useState([])
->>>>>>> Stashed changes
 
     const getDataFromLS = () => {
         const cartItem = localStorage.getItem(CART) || '[]';
