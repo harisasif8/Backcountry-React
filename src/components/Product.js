@@ -24,13 +24,18 @@ const Product = ({ product }) => {
     const AddToCartDrawer = (event) => {
 
         if (event.target.value === addToCart) {
-            setCartData({
+            setCartData([...cartData, ...[{
                 id: product.id,
                 price: product.activePrice.maxListPrice,
                 quantity: 1
 
+<<<<<<< Updated upstream
             })
             setIsDrawerOpen(true);
+=======
+            }]])
+            onDrawerOpen(true);
+>>>>>>> Stashed changes
             setCartBtnText(removeFromCart)
         }
         else if (event.target.value === removeFromCart) {
