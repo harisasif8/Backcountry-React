@@ -29,13 +29,8 @@ const Product = ({ product }) => {
                 price: product.activePrice.maxListPrice,
                 quantity: 1
 
-<<<<<<< Updated upstream
-            })
-            setIsDrawerOpen(true);
-=======
             }]])
             onDrawerOpen(true);
->>>>>>> Stashed changes
             setCartBtnText(removeFromCart)
         }
         else if (event.target.value === removeFromCart) {
