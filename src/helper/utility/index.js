@@ -1,0 +1,1 @@
+export { getDataFromLS } from './LSitems'

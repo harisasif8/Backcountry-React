@@ -1,17 +1,19 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, lazy } from 'react';
 import { ShimmerPostList } from "react-shimmer-effects";
 import Product from './Product';
-import { ProductContext } from './ProductContext'
-import UseDebounce from './../hooks/UseDebounce'
-import UseQuery from '../hooks/UseQuery';
+// import { ProductContext } from './ProductContext'
+import { ProductContext } from 'contexts/ProductContext'
+import UseDebounce from 'hooks/UseDebounce'
+import UseQuery from 'hooks/UseQuery';
 import CartDrawer from './CartDrawer';
 
-
+// const Product = lazy(() => import('./Product'));
 const ProductListing = () => {
     const [{ products, isProductLoading }] = useContext(ProductContext);
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [searchText, setSearchText] = useState('');
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
 
     const debouncedText = UseDebounce(searchText, 500).toLowerCase();
 

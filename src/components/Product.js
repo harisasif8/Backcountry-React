@@ -1,8 +1,11 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
-import { CartContext } from './CartContext';
+import { CartContext, CART } from 'contexts/CartContext';
+import { getItemFromLS } from 'helper/utility/LSitems';
 
+const cartItem = localStorage.getItem(CART) || '[]';
+const parsedCartItem = JSON.parse(cartItem)
 
 const Product = ({ product, onDrawerOpen }) => {
     const addToCart = 'Add To Cart';
@@ -10,15 +13,31 @@ const Product = ({ product, onDrawerOpen }) => {
     const [cartData, setCartData] = useContext(CartContext)
     const [cartBtnText, setCartBtnText] = useState(addToCart)
 
+    const isAddedToCart = parsedCartItem.find((cartProduct) => cartProduct.id === product.id)
+    console.log('isAddedToCart', isAddedToCart);
+
+    useEffect(() => {
+        if (isAddedToCart) {
+            setCartBtnText(removeFromCart)
+        }
+    }, [isAddedToCart])
+
+
     const AddToCartDrawer = (event) => {
+        const data = {
+            id: product.id,
+            price: product.activePrice.maxListPrice,
+            quantity: 1
 
+        }
         if (event.target.value === addToCart) {
-            setCartData([...cartData, ...[{
-                id: product.id,
-                price: product.activePrice.maxListPrice,
-                quantity: 1
+            setCartData([...cartData, data])
 
-            }]])
+            const cartItem = getItemFromLS(CART) || '[]';
+            let parsedCartItem = JSON.parse(cartItem)
+            parsedCartItem.push(data);
+            localStorage.setItem(CART, JSON.stringify(parsedCartItem));
+
             onDrawerOpen(true);
             setCartBtnText(removeFromCart)
         }

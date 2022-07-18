@@ -1,12 +1,14 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { ProductContext } from './ProductContext'
+import { ProductContext } from 'contexts/ProductContext'
 import { Drawer } from 'rsuite'
-import { CartContext } from './CartContext';
+import { CartContext } from 'contexts/CartContext';
 
 const CartDrawer = ({ isDrawerOpen, onDrawerClose }) => {
 
     const [{ products }] = useContext(ProductContext);
     const [cartData] = useContext(CartContext);
+    // const cartItem = localStorage.getItem(CART) || '[]';
+    // const parsedCartItem = JSON.parse(cartItem)
 
     const [filteredCartProduct, setFilteredCartProduct] = useState([]);
 
@@ -32,7 +34,6 @@ const CartDrawer = ({ isDrawerOpen, onDrawerClose }) => {
             <Drawer.Body >
 
                 {filteredCartProduct.map((cartProduct, index) => {
-                    // const filteredCartId = products.find((cartId) => cartProductId.id === cartId.id)
                     const { title: productTitle, productMainImage: { name: BrandName }, activePrice: { maxListPrice: productPrice }, productMainImage: { mediumImg: productImage } } = cartProduct;
                     return (
                         <div key={`cart-${products.id}${index}`} className='cart-card'>
