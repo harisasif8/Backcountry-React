@@ -2,15 +2,14 @@ import React, { useContext, useState, useEffect } from 'react';
 import { ProductContext } from 'contexts/ProductContext'
 import { Drawer } from 'rsuite'
 import { CartContext } from 'contexts/CartContext';
+import AddedToCartItems from 'helper/utility/AddedToCartItems';
 
 const CartDrawer = ({ isDrawerOpen, onDrawerClose }) => {
 
     const [{ products }] = useContext(ProductContext);
     const [cartData] = useContext(CartContext);
-    // const cartItem = localStorage.getItem(CART) || '[]';
-    // const parsedCartItem = JSON.parse(cartItem)
-
     const [filteredCartProduct, setFilteredCartProduct] = useState([]);
+
 
     useEffect(() => {
         const items = products.filter((cartProductId) =>
@@ -19,6 +18,10 @@ const CartDrawer = ({ isDrawerOpen, onDrawerClose }) => {
         setFilteredCartProduct([...items])
 
     }, [cartData]);
+
+    //    const a = AddedToCartItems(addedToCartItems)
+
+
 
     return (
         <Drawer
@@ -34,9 +37,9 @@ const CartDrawer = ({ isDrawerOpen, onDrawerClose }) => {
             <Drawer.Body >
 
                 {filteredCartProduct.map((cartProduct, index) => {
-                    const { title: productTitle, productMainImage: { name: BrandName }, activePrice: { maxListPrice: productPrice }, productMainImage: { mediumImg: productImage } } = cartProduct;
+                    const { title: productTitle, productMainImage: { name: BrandName }, activePrice: { maxListPrice: productPrice }, productMainImage: { mediumImg: productImage }, id: ProductId } = cartProduct;
                     return (
-                        <div key={`cart-${products.id}${index}`} className='cart-card'>
+                        <div key={`cart-${ProductId}${index}`} className='cart-card'>
                             <div className='cart-img'>
                                 <img src={`https://www.backcountry.com${productImage}`} alt="Avatar" className='cart-product-img' />
                             </div>

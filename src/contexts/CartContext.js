@@ -1,4 +1,5 @@
 import { useState, createContext, useEffect } from 'react';
+import { getItemFromLS } from 'helper/utility/LSitems'
 
 
 export const CartContext = createContext();
@@ -6,19 +7,10 @@ export const CART = 'Cart'
 
 
 export const CartProvider = props => {
-    const [cartData, setCartData] = useState([])
-
-
-    // useEffect(() => {
-    //     if (Object.keys(cartData).length) {
-    //         getDataFromLS()
-
-    //     }
-
-    // }, [cartData])
+    const [cartData, setCartData] = useState({})
 
     useEffect(() => {
-        const cartItem = localStorage.getItem(CART) || '[]';
+        const cartItem = getItemFromLS(CART) || '[]';
         let parsedCartItem = JSON.parse(cartItem)
         setCartData([...parsedCartItem]);
 
@@ -27,7 +19,7 @@ export const CartProvider = props => {
     return (
         <CartContext.Provider value={[cartData, setCartData]}>
             {props.children}
-        </CartContext.Provider>
+        </CartContext.Provider >
     );
 
 }

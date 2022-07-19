@@ -10,7 +10,7 @@ const Header = () => {
 
     const query = UseQuery();
     const searchTerm = query.get('search');
-    
+
     const [searchValue, setSearchValue] = useState(searchTerm);
     const navigate = useNavigate();
 
@@ -27,7 +27,7 @@ const Header = () => {
                 <div className='discount'> <a href="#" className='black-color'> Up To 50% Off 10,000+ Styles For Summer <u> Shop Now </u> </a> </div>
                 <div className='main-nav'>
                     <div>
-                        <img src={logo} className='bc-logo' alt="" />
+                       <a> <img src={logo} className='bc-logo' alt="" /></a>
                     </div>
                     <form action="" className='search-bar' onSubmit={searchProduct}>
                         <div className="input-icons">

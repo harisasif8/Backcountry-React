@@ -4,7 +4,8 @@ import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { CartContext, CART } from 'contexts/CartContext';
 import { getItemFromLS } from 'helper/utility/LSitems';
 
-const cartItem = localStorage.getItem(CART) || '[]';
+
+const cartItem = getItemFromLS(CART) || '[]';
 const parsedCartItem = JSON.parse(cartItem)
 
 const Product = ({ product, onDrawerOpen }) => {
@@ -14,7 +15,6 @@ const Product = ({ product, onDrawerOpen }) => {
     const [cartBtnText, setCartBtnText] = useState(addToCart)
 
     const isAddedToCart = parsedCartItem.find((cartProduct) => cartProduct.id === product.id)
-    console.log('isAddedToCart', isAddedToCart);
 
     useEffect(() => {
         if (isAddedToCart) {

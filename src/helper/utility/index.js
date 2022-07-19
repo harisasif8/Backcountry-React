@@ -1,1 +1,1 @@
-export { getDataFromLS } from './LSitems'
+// export { getDataFromLS } from './LSitems'
