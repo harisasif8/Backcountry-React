@@ -11,9 +11,8 @@ const parsedCartItem = JSON.parse(cartItem)
 const Product = ({ product, onDrawerOpen }) => {
     const addToCart = 'Add To Cart';
     const removeFromCart = 'Remove From Cart';
-    const [cartData, setCartData] = useContext(CartContext)
     const [cartBtnText, setCartBtnText] = useState(addToCart)
-
+    const [{ cartData }, dispatch] = useContext(CartContext)
     const isAddedToCart = parsedCartItem.find((cartProduct) => cartProduct.id === product.id)
 
     useEffect(() => {
@@ -31,7 +30,8 @@ const Product = ({ product, onDrawerOpen }) => {
 
         }
         if (event.target.value === addToCart) {
-            setCartData([...cartData, data])
+            dispatch({ type: 'ADD_TO_CART', payload: { cartData: [...cartData, data] } })
+
 
             const cartItem = getItemFromLS(CART) || '[]';
             let parsedCartItem = JSON.parse(cartItem)

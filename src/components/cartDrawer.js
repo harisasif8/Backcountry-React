@@ -1,27 +1,11 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { ProductContext } from 'contexts/ProductContext'
+import React, { useContext } from 'react';
 import { Drawer } from 'rsuite'
 import { CartContext } from 'contexts/CartContext';
-import AddedToCartItems from 'helper/utility/AddedToCartItems';
+
 
 const CartDrawer = ({ isDrawerOpen, onDrawerClose }) => {
 
-    const [{ products }] = useContext(ProductContext);
-    const [cartData] = useContext(CartContext);
-    const [filteredCartProduct, setFilteredCartProduct] = useState([]);
-
-
-    useEffect(() => {
-        const items = products.filter((cartProductId) =>
-            cartData.find((cartId) => cartProductId.id === cartId.id)
-        )
-        setFilteredCartProduct([...items])
-
-    }, [cartData]);
-
-    //    const a = AddedToCartItems(addedToCartItems)
-
-
+    const [{ filteredCartData }] = useContext(CartContext)
 
     return (
         <Drawer
@@ -36,7 +20,7 @@ const CartDrawer = ({ isDrawerOpen, onDrawerClose }) => {
             </Drawer.Header>
             <Drawer.Body >
 
-                {filteredCartProduct.map((cartProduct, index) => {
+                {filteredCartData.map((cartProduct, index) => {
                     const { title: productTitle, productMainImage: { name: BrandName }, activePrice: { maxListPrice: productPrice }, productMainImage: { mediumImg: productImage }, id: ProductId } = cartProduct;
                     return (
                         <div key={`cart-${ProductId}${index}`} className='cart-card'>
