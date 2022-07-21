@@ -26,7 +26,6 @@ export const ProductProvider = props => {
                         ...(searchTerm ? { q: searchTerm } : { q: '' })
                     }
                 });
-
                 setProductData({ isProductLoading: false, products: response?.data?.products || [] })
             } catch (err) {
                 setProductData({ ...productData, isProductLoading: false })

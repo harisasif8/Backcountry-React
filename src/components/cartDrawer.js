@@ -5,7 +5,16 @@ import { CartContext } from 'contexts/CartContext';
 
 const CartDrawer = ({ isDrawerOpen, onDrawerClose }) => {
 
-    const [{ filteredCartData }] = useContext(CartContext)
+    const [{ filteredCartData, cartData }] = useContext(CartContext)
+    console.log('filteredCartData', filteredCartData);
+    console.log('cartData', cartData);
+
+    
+
+
+    const removeItemFromCartDrawer = (e) => {
+
+    }
 
     return (
         <Drawer
@@ -32,7 +41,7 @@ const CartDrawer = ({ isDrawerOpen, onDrawerClose }) => {
                                 <h6>Quantity: 1</h6>
                                 <h6>{`Color: ${BrandName} `}</h6>
                                 <h6>{`Price : $${productPrice}`}</h6>
-                                <button className='add-cart-button'>Remove</button>
+                                <button className='add-cart-button' name="remove-btn" onClick={(event) => removeItemFromCartDrawer(event)}>Remove</button>
                                 <hr></hr>
                             </div>
                         </div>)
@@ -41,8 +50,6 @@ const CartDrawer = ({ isDrawerOpen, onDrawerClose }) => {
         </Drawer>
     )
 }
-
-
 
 
 export default CartDrawer

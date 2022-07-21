@@ -23,10 +23,10 @@ function App() {
           <div>
             <Header />
             <Routes>
-              <Route exact path="/products"
+              <Route exact path="products"
                 element={<ProductListing />} />
-              <Route exact path="/cart"
-              element={<Cart />} />
+              <Route exact path="cart"
+                element={<Cart />} />
             </Routes>
           </div>
         </CartProvider>

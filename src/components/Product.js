@@ -2,22 +2,28 @@ import { useState, useContext, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { CartContext, CART } from 'contexts/CartContext';
+import { addToCart, filterCartItem, removeFromCart } from 'reducers/cartReducer';
 import { getItemFromLS } from 'helper/utility/LSitems';
 
 
 const cartItem = getItemFromLS(CART) || '[]';
-const parsedCartItem = JSON.parse(cartItem)
+let parsedCartItem = JSON.parse(cartItem)
 
 const Product = ({ product, onDrawerOpen }) => {
-    const addToCart = 'Add To Cart';
-    const removeFromCart = 'Remove From Cart';
-    const [cartBtnText, setCartBtnText] = useState(addToCart)
-    const [{ cartData }, dispatch] = useContext(CartContext)
+    const addToCartText = 'Add To Cart';
+    const removeFromCartText = 'Remove From Cart';
+    const [cartBtnText, setCartBtnText] = useState(addToCartText)
+    const [{ cartData, filteredCartData }, dispatch] = useContext(CartContext)
+    // console.log('cartData', cartData);
+    // console.log('filteredCartData', filteredCartData);
+
+
+
     const isAddedToCart = parsedCartItem.find((cartProduct) => cartProduct.id === product.id)
 
     useEffect(() => {
         if (isAddedToCart) {
-            setCartBtnText(removeFromCart)
+            setCartBtnText(removeFromCartText)
         }
     }, [isAddedToCart])
 
@@ -29,20 +35,24 @@ const Product = ({ product, onDrawerOpen }) => {
             quantity: 1
 
         }
-        if (event.target.value === addToCart) {
-            dispatch({ type: 'ADD_TO_CART', payload: { cartData: [...cartData, data] } })
+        if (event.target.value === addToCartText) {
+            console.log('cartData', cartData);
+            dispatch({ type: addToCart, payload: { cartData: [data] } })
 
-
-            const cartItem = getItemFromLS(CART) || '[]';
-            let parsedCartItem = JSON.parse(cartItem)
             parsedCartItem.push(data);
             localStorage.setItem(CART, JSON.stringify(parsedCartItem));
 
             onDrawerOpen(true);
-            setCartBtnText(removeFromCart)
+            setCartBtnText(removeFromCartText)
         }
-        else if (event.target.value === removeFromCart) {
-            setCartBtnText(addToCart)
+        //REMOVE_FROM_CART = "REMOVE_FROM_CART"
+        else if (event.target.value === removeFromCartText) {
+            const isAddedToCartIndex = parsedCartItem.indexOf(isAddedToCart)
+            const items = cartData.filter((cartItem) => cartItem.id !== product.id);
+            dispatch({ type: removeFromCart, payload: { cartData: [...items] } })
+            parsedCartItem.splice(isAddedToCartIndex, 1)
+            localStorage.setItem(CART, JSON.stringify(parsedCartItem))
+            setCartBtnText(addToCartText)
         }
     }
 
@@ -61,7 +71,7 @@ const Product = ({ product, onDrawerOpen }) => {
                             <i key={`${product.title}-rating-${ratingIndex}`} ><FontAwesomeIcon icon={faStar} /></i>)
                         )}
                     </p>
-                    <input type='button' onClick={(event) => AddToCartDrawer(event)} className='cart-button' id='cart-btn' value={cartBtnText}></input>
+                    <input type='button' onClick={(event) => AddToCartDrawer(event)} className='cart-button' value={cartBtnText}></input>
                 </div>
             </div>
         </div>

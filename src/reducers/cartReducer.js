@@ -1,6 +1,7 @@
-import React, { useContext, useState, useEffect, useReducer } from 'react';
-import { ProductContext } from 'contexts/ProductContext'
-import { CartContext } from 'contexts/CartContext';
+export const addToCart = "ADD_TO_CART";
+export const filterCartItem = "FILTER_CART_ITEM";
+export const removeFromCart = "REMOVE-FROM-CART"
+
 
 export const initialCartState = {
     cartData: [],
@@ -11,16 +12,22 @@ const CartReducer = (state, action) => {
     const { type, payload } = action;
 
     switch (type) {
-        case "ADD_TO_CART":
+        case addToCart:
             return {
                 ...state,
                 cartData: [...state.cartData, ...payload.cartData]
             }
-            case "FILTER_CART_ITEM":
+        case filterCartItem:
             return {
                 ...state,
                 filteredCartData: [...payload.filteredCartData]
             }
+        case removeFromCart:
+            return {
+                ...state,
+                cartData: [...payload.cartData],
+            }
+
         default:
             throw new Error('No case for type')
     }
