@@ -1,11 +1,13 @@
+import { deleteItem, updateItem } from "utils";
+
 export const addToCart = "ADD_TO_CART";
 export const filterCartItem = "FILTER_CART_ITEM";
 export const removeFromCart = "REMOVE-FROM-CART"
+export const UPDATE_CART_QUANTITY = "UPDATE_CART_QUANTITY"
 
 
 export const initialCartState = {
     cartData: [],
-    filteredCartData: []
 }
 
 const CartReducer = (state, action) => {
@@ -17,15 +19,18 @@ const CartReducer = (state, action) => {
                 ...state,
                 cartData: [...state.cartData, ...payload.cartData]
             }
-        case filterCartItem:
-            return {
-                ...state,
-                filteredCartData: [...payload.filteredCartData]
-            }
         case removeFromCart:
             return {
                 ...state,
-                cartData: [...payload.cartData],
+                cartData: deleteItem([...state.cartData], payload.deleteIndex),
+            }
+        case UPDATE_CART_QUANTITY:
+            {
+                console.log('payload', payload.selectedIndex, payload.item);
+                return {
+                    ...state,
+                    cartData: updateItem([...state.cartData], payload.selectedIndex, payload.item)
+                }
             }
 
         default:

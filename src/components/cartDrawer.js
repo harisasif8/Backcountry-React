@@ -1,19 +1,20 @@
 import React, { useContext } from 'react';
 import { Drawer } from 'rsuite'
-import { CartContext } from 'contexts/CartContext';
+import { CartContext, CART } from 'contexts/CartContext';
+import { getItemFromLS } from 'helper/utility/LSitems';
+import { removeFromCart } from 'reducers/cartReducer';
 
 
 const CartDrawer = ({ isDrawerOpen, onDrawerClose }) => {
+    const cartItem = getItemFromLS(CART) || '[]';
+    let parsedCartItem = JSON.parse(cartItem);
 
-    const [{ filteredCartData, cartData }] = useContext(CartContext)
-    console.log('filteredCartData', filteredCartData);
-    console.log('cartData', cartData);
+    const [{ cartData }, dispatch] = useContext(CartContext)
 
-    
-
-
-    const removeItemFromCartDrawer = (e) => {
-
+    const removeItemFromCartDrawer = (event, index) => {
+        dispatch({ type: removeFromCart, payload: { deleteIndex: index } })
+        parsedCartItem.splice(index, 1)
+        localStorage.setItem(CART, JSON.stringify(parsedCartItem))
     }
 
     return (
@@ -23,13 +24,14 @@ const CartDrawer = ({ isDrawerOpen, onDrawerClose }) => {
             backdrop={true}
             open={isDrawerOpen}
             onClose={() => onDrawerClose(false)}
+
         >
             <Drawer.Header>
                 <Drawer.Title> <h3>Cart</h3> </Drawer.Title>
             </Drawer.Header>
             <Drawer.Body >
 
-                {filteredCartData.map((cartProduct, index) => {
+                {cartData.map((cartProduct, index) => {
                     const { title: productTitle, productMainImage: { name: BrandName }, activePrice: { maxListPrice: productPrice }, productMainImage: { mediumImg: productImage }, id: ProductId } = cartProduct;
                     return (
                         <div key={`cart-${ProductId}${index}`} className='cart-card'>
@@ -41,7 +43,7 @@ const CartDrawer = ({ isDrawerOpen, onDrawerClose }) => {
                                 <h6>Quantity: 1</h6>
                                 <h6>{`Color: ${BrandName} `}</h6>
                                 <h6>{`Price : $${productPrice}`}</h6>
-                                <button className='add-cart-button' name="remove-btn" onClick={(event) => removeItemFromCartDrawer(event)}>Remove</button>
+                                <button className='add-cart-button' name="remove-btn" onClick={(event) => removeItemFromCartDrawer(event, index)}>Remove</button>
                                 <hr></hr>
                             </div>
                         </div>)

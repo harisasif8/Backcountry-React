@@ -1,16 +1,59 @@
-import { useContext, useEffect } from 'react';
-import { CartContext } from 'contexts/CartContext';
+import { useContext, useState } from 'react';
+import { CartContext, CART } from 'contexts/CartContext';
+import { getItemFromLS } from 'helper/utility/LSitems';
+import { removeFromCart, UPDATE_CART_QUANTITY } from 'reducers/cartReducer';
+
+
 
 
 
 const Cart = () => {
+    const cartItem = getItemFromLS(CART) || '[]';
+    let parsedCartItem = JSON.parse(cartItem)
 
-    const [{ filteredCartData, cartData }] = useContext(CartContext);
-    if (filteredCartData.length) {
+    const [{ cartData }, dispatch] = useContext(CartContext)
+
+
+    // const [quantityValue, setQuantityValue] = useState(1)
+
+    if (cartData.length) {
         const emptyCartContent = document.getElementById('empty-cart-contents')
         emptyCartContent.textContent = ''
     }
 
+    const removeItemFromCart = (event, index) => {
+        dispatch({ type: removeFromCart, payload: { deleteIndex: index } })
+        parsedCartItem.splice(index, 1)
+        localStorage.setItem(CART, JSON.stringify(parsedCartItem))
+    }
+
+    const quantityHandler = (e, index) => {
+        console.log('cartData[index].selectedQuantity', cartData[index].selectedQuantity);
+
+
+        if (e.target.value === 'increment') {
+            let item = { ...cartData[index] };
+            item.selectedQuantity += 1;
+            dispatch({ type: UPDATE_CART_QUANTITY, payload: { item, selectedIndex: index } })
+            parsedCartItem.splice(index, 1, item);
+            localStorage.setItem(CART, JSON.stringify(parsedCartItem))
+
+            console.log("parsedCartItem", parsedCartItem);
+
+
+
+            console.log('cartData[index].selectedQuantity', cartData[index].selectedQuantity);
+        }
+        else {
+
+            let quantity = cartData[index].selectedQuantity;
+            quantity -= 1;
+            dispatch({ type: UPDATE_CART_QUANTITY, payload: { selectedIndex: index, selectedQuantity: quantity } })
+
+
+
+        }
+    }
 
     return (
         <>
@@ -33,10 +76,10 @@ const Cart = () => {
                     </div>
                 </div>
 
-                {filteredCartData.map((filteredProduct) => {
-                    const { id: productId, title: productTitle, productMainImage: { mediumImg: productImage }, productMainImage: { name: productColor }, selectedSize: productSize, activePrice: { maxListPrice: productPrice } } = filteredProduct;
+                {cartData.map((filteredProduct, index) => {
+                    const { id: productId, title: productTitle, productMainImage: { mediumImg: productImage }, productMainImage: { name: productColor }, selectedSize: productSize, activePrice: { maxListPrice: productPrice }, selectedQuantity: productQuantity } = filteredProduct;
                     return (
-                        <div className="ls-cart-contents" key={`cart-item-${productTitle}`}>
+                        <div className="ls-cart-contents" key={`cart-item-${productTitle}+${index}`}>
                             <div className="cart-item-image-div">
                                 <img className="cart-item-image" src={`https://www.backcountry.com${productImage}`} alt="" />
                             </div>
@@ -50,13 +93,13 @@ const Cart = () => {
                             </div>
                             <div className="cart-quantity">
                                 <div>
-                                    <button className="quantity-btn">-</button>
-                                    <span value={0} className="quantity-value">0</span>
-                                    <button className="quantity-btn">+</button>
+                                    <button className="quantity-btn" value='decrement' onClick={(event) => quantityHandler(event, index)}>-</button>
+                                    <span value={productQuantity} className="quantity-value" id='quantity-value'>{productQuantity}</span>
+                                    <button className="quantity-btn" value='increment' onClick={(event) => quantityHandler(event, index)}>+</button>
                                 </div>
                                 <div>
-                                    <h5 className='black-color cart-item-price'>${productPrice}</h5>
-                                    <button className="remove-btn">Remove</button>
+                                    <h5 className='black-color cart-item-price'>${productPrice * productQuantity}</h5>
+                                    <button className="remove-btn" onClick={(event) => removeItemFromCart(event, index)}>Remove</button>
                                 </div>
                             </div>
                         </div>

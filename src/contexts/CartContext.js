@@ -16,7 +16,6 @@ export const CartProvider = props => {
 
 
     useEffect(() => {
-
         const cartItem = getItemFromLS(CART) || '[]';
         let parsedCartItem = JSON.parse(cartItem)
         if (parsedCartItem.length) {
@@ -24,18 +23,6 @@ export const CartProvider = props => {
         }
 
     }, []);
-
-    useEffect(() => {
-        if (products.length && state.cartData.length) {
-            const items = products.filter((cartProductId) =>
-                state.cartData.find((cartId) => cartProductId.id === cartId.id)
-            )
-            dispatch({ type: filterCartItem, payload: { filteredCartData: [...items] } });
-        }
-
-
-
-    }, [state.cartData, products]);
 
     return (
         <CartContext.Provider value={[state, dispatch]}>
