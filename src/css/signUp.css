@@ -1,0 +1,75 @@
+
+.authentication-form{
+    border: 2px solid black;
+    margin: 25% 25% 25% 25%;
+    padding: 5% 5% 5% 5%;
+    border-radius: 1em;
+
+
+}
+
+.authentication-name{
+
+}
+
+.name{
+    border: 2px solid black;
+    padding: 1% 1% 1% 1%;
+    margin: 0 5% 5% 5%;
+    border-radius: 0.5em;
+    font-size: larger;
+    color: black;
+    width: 40%;
+}
+
+.name::placeholder{
+    color: black;
+    
+}
+
+.email{
+    border: 2px solid black;
+    padding: 1% 1% 1% 1%;
+    margin: 0 5% 5% 5%;
+    border-radius: 0.5em;
+    font-size: larger;
+    color: black;
+    width: 90%;
+}
+
+.email::placeholder{
+    color: black;
+    
+}
+
+.create-account{
+    margin: 0% 5% 5%;
+    color: black;
+    font-weight: bolder;
+}
+
+.sign-up-btn{
+    background-color: black;
+    color: white;
+    transition-duration: 0.4s;
+    border-radius: 2em;
+    margin: 5%;
+    font-weight: bold;
+    font-size: larger;
+    padding: 12px 32px;
+    cursor: pointer;
+    border: 2px solid black;
+    margin-top: 5%;
+    width: 50%;
+}
+
+.sign-up-btn:hover {
+    background-color: #ddc9a3;
+    color: black;
+}
+
+.sign-in{
+    margin: 5% 19% 0 19%;
+    color: black;
+    font-weight: bolder;
+}
