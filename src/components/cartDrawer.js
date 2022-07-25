@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Drawer } from 'rsuite'
 import { CartContext, CART } from 'contexts/CartContext';
 import { getItemFromLS } from 'helper/utility/LSitems';
-import { removeFromCart } from 'reducers/cartReducer';
+import { REMOVE_FROM_CART } from 'reducers/cartReducer';
 
 
 const CartDrawer = ({ isDrawerOpen, onDrawerClose }) => {
@@ -12,7 +12,7 @@ const CartDrawer = ({ isDrawerOpen, onDrawerClose }) => {
     const [{ cartData }, dispatch] = useContext(CartContext)
 
     const removeItemFromCartDrawer = (event, index) => {
-        dispatch({ type: removeFromCart, payload: { deleteIndex: index } })
+        dispatch({ type: REMOVE_FROM_CART, payload: { deleteIndex: index } })
         parsedCartItem.splice(index, 1)
         localStorage.setItem(CART, JSON.stringify(parsedCartItem))
     }

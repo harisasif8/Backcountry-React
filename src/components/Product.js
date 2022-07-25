@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { CartContext, CART } from 'contexts/CartContext';
-import { addToCart, removeFromCart } from 'reducers/cartReducer';
+import {  ADD_TO_CART, REMOVE_FROM_CART } from 'reducers/cartReducer';
 import { getItemFromLS } from 'helper/utility/LSitems';
 
 
@@ -25,7 +25,7 @@ const Product = ({ product, onDrawerOpen }) => {
     const AddToCartDrawer = (event) => {
 
         if (event.target.value === addToCartText) {
-            dispatch({ type: addToCart, payload: { cartData: [product] } })
+            dispatch({ type: ADD_TO_CART, payload: { cartData: [product] } })
 
             parsedCartItem.push(product);
             localStorage.setItem(CART, JSON.stringify(parsedCartItem));
@@ -35,7 +35,7 @@ const Product = ({ product, onDrawerOpen }) => {
         }
         else if (event.target.value === removeFromCartText) {
             const isAddedToCartIndex = parsedCartItem.indexOf(isAddedToCart)
-            dispatch({ type: removeFromCart, payload: { deleteIndex: isAddedToCartIndex } })
+            dispatch({ type: REMOVE_FROM_CART, payload: { deleteIndex: isAddedToCartIndex } })
 
             parsedCartItem.splice(isAddedToCartIndex, 1)
             localStorage.setItem(CART, JSON.stringify(parsedCartItem))

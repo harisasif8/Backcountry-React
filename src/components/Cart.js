@@ -1,7 +1,7 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { CartContext, CART } from 'contexts/CartContext';
 import { getItemFromLS } from 'helper/utility/LSitems';
-import { removeFromCart, UPDATE_CART_QUANTITY } from 'reducers/cartReducer';
+import { REMOVE_FROM_CART, UPDATE_CART_QUANTITY } from 'reducers/cartReducer';
 
 
 
@@ -13,45 +13,45 @@ const Cart = () => {
 
     const [{ cartData }, dispatch] = useContext(CartContext)
 
-
-    // const [quantityValue, setQuantityValue] = useState(1)
-
     if (cartData.length) {
         const emptyCartContent = document.getElementById('empty-cart-contents')
         emptyCartContent.textContent = ''
     }
 
     const removeItemFromCart = (event, index) => {
-        dispatch({ type: removeFromCart, payload: { deleteIndex: index } })
+        dispatch({ type: REMOVE_FROM_CART, payload: { deleteIndex: index } })
         parsedCartItem.splice(index, 1)
         localStorage.setItem(CART, JSON.stringify(parsedCartItem))
     }
 
     const quantityHandler = (e, index) => {
-        console.log('cartData[index].selectedQuantity', cartData[index].selectedQuantity);
-
+        let item = { ...cartData[index] };
+        const decrementBtn = document.getElementById(item.id)
 
         if (e.target.value === 'increment') {
-            let item = { ...cartData[index] };
             item.selectedQuantity += 1;
             dispatch({ type: UPDATE_CART_QUANTITY, payload: { item, selectedIndex: index } })
             parsedCartItem.splice(index, 1, item);
             localStorage.setItem(CART, JSON.stringify(parsedCartItem))
 
-            console.log("parsedCartItem", parsedCartItem);
-
-
-
-            console.log('cartData[index].selectedQuantity', cartData[index].selectedQuantity);
         }
         else {
+            item.selectedQuantity -= 1;
+            dispatch({ type: UPDATE_CART_QUANTITY, payload: { item, selectedIndex: index } })
+            parsedCartItem.splice(index, 1, item);
+            localStorage.setItem(CART, JSON.stringify(parsedCartItem))
 
-            let quantity = cartData[index].selectedQuantity;
-            quantity -= 1;
-            dispatch({ type: UPDATE_CART_QUANTITY, payload: { selectedIndex: index, selectedQuantity: quantity } })
+        }
 
+        if (item.selectedQuantity <= 1) {
+            // e.target.disabled = true;
+            decrementBtn.setAttribute('disabled', 'true')
+            console.log(decrementBtn)
+        }
 
-
+        else {
+            decrementBtn.removeAttribute('disabled')
+            console.log(decrementBtn)
         }
     }
 
@@ -93,12 +93,12 @@ const Cart = () => {
                             </div>
                             <div className="cart-quantity">
                                 <div>
-                                    <button className="quantity-btn" value='decrement' onClick={(event) => quantityHandler(event, index)}>-</button>
+                                    <button className="quantity-btn" value='decrement' id={productId} disabled={false} onClick={(event) => quantityHandler(event, index)}>-</button>
                                     <span value={productQuantity} className="quantity-value" id='quantity-value'>{productQuantity}</span>
                                     <button className="quantity-btn" value='increment' onClick={(event) => quantityHandler(event, index)}>+</button>
                                 </div>
                                 <div>
-                                    <h5 className='black-color cart-item-price'>${productPrice * productQuantity}</h5>
+                                    <h5 className='black-color cart-item-price'>${(productPrice * productQuantity).toFixed(2)}</h5>
                                     <button className="remove-btn" onClick={(event) => removeItemFromCart(event, index)}>Remove</button>
                                 </div>
                             </div>
