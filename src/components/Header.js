@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faComments, faPhone, faUserCircle, faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom';
 import UseQuery from '../hooks/UseQuery';
+import { Link } from "react-router-dom";
+
 
 
 const Header = () => {
@@ -23,11 +25,13 @@ const Header = () => {
 
     return (
         <div>
-            <header>
+            <header className='header'>
                 <div className='discount'> <a href="#" className='black-color'> Up To 50% Off 10,000+ Styles For Summer <u> Shop Now </u> </a> </div>
                 <div className='main-nav'>
                     <div>
-                       <a> <img src={logo} className='bc-logo' alt="" /></a>
+                        <Link to={'products'}>
+                            <img src={logo} className='bc-logo' alt="" />
+                        </Link>
                     </div>
                     <form action="" className='search-bar' onSubmit={searchProduct}>
                         <div className="input-icons">
@@ -42,11 +46,14 @@ const Header = () => {
                         <button className='icon-btn'> <i><FontAwesomeIcon icon={faPhone} /><u> 1-800-409-4502</u></i></button>
                     </div>
                     <div className='user-icon'>
-                        <button className='icon-btn'> <i><FontAwesomeIcon icon={faUserCircle} />My Account</i></button>
-
+                        <Link to={'signup'}>
+                            <button className='icon-btn'> <i><FontAwesomeIcon icon={faUserCircle} />My Account</i></button>
+                        </Link>
                     </div>
                     <div className='cart-icon'>
-                        <button className='icon-btn'> <i><FontAwesomeIcon icon={faShoppingCart} /></i></button>
+                        <Link to={"cart"}>
+                            <button className='icon-btn'> <i><FontAwesomeIcon icon={faShoppingCart} /></i></button>
+                        </Link>
                     </div>
 
                 </div>

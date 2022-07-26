@@ -1,6 +1,6 @@
 import React from 'react';
 import 'App.css';
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import 'css/ProductListing.css'
 import 'css/general.css'
 import 'css/cart.css'
@@ -12,30 +12,32 @@ import '../node_modules/rsuite/dist/rsuite.min.css';
 import { CartProvider } from 'contexts/CartContext'
 import Cart from 'components/Cart';
 import SignUp from 'components/SignUp';
+import SignIn from 'components/SignIn';
 
 
 
 
 function App() {
 
+
   return (
-    <Router>
-      <ProductProvider>
-        <CartProvider>
-          <div>
-            <Header />
+    <div>
+      <SignUp />
+      {/* <SignIn/> */}
+      <Router>
+        <ProductProvider>
+          <CartProvider>
+            {/* <Header />
             <Routes>
               <Route exact path="products"
                 element={<ProductListing />} />
               <Route exact path="cart"
                 element={<Cart />} />
-              <Route exact path="Signup"
-                element={<SignUp />} />
-            </Routes>
-          </div>
-        </CartProvider>
-      </ProductProvider>
-    </Router>
+            </Routes> */}
+          </CartProvider>
+        </ProductProvider>
+      </Router>
+    </div>
 
   );
 }

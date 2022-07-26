@@ -44,7 +44,6 @@ const Cart = () => {
         }
 
         if (item.selectedQuantity <= 1) {
-            // e.target.disabled = true;
             decrementBtn.setAttribute('disabled', 'true')
             console.log(decrementBtn)
         }
