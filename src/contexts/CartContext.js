@@ -1,7 +1,6 @@
-import { createContext, useEffect, useReducer, useContext } from 'react';
+import { createContext, useEffect, useReducer } from 'react';
 import { getItemFromLS } from 'helper/utility/LSitems'
 import cartReducer, { initialCartState, ADD_TO_CART } from 'reducers/cartReducer';
-import { ProductContext } from 'contexts/ProductContext'
 
 
 
@@ -12,8 +11,6 @@ export const CART = 'Cart'
 export const CartProvider = props => {
 
     const [state, dispatch] = useReducer(cartReducer, initialCartState);
-    const [{ products }] = useContext(ProductContext);
-
 
     useEffect(() => {
         const cartItem = getItemFromLS(CART) || '[]';

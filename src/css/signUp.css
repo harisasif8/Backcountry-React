@@ -33,15 +33,34 @@ html body {
 .email {
     border: 2px solid black;
     padding: 1% 1% 1% 1%;
-    margin: 0 5% 5% 5%;
+    margin: 0 5% 0 5%;
     border-radius: 0.5em;
     font-size: small;
     color: black;
     width: 90%;
 }
 
+.password{
+    border: 2px solid black;
+    padding: 1% 1% 1% 1%;
+    margin: 5% 5% 0 5%;
+    border-radius: 0.5em;
+    font-size: small;
+    color: black;
+    width: 90%;
+}
+
+.password::placeholder {
+    color: black;
+}
+
 .email::placeholder {
     color: black;
+}
+
+.email-validation {
+    color: red;
+    margin-left: 5%;
 }
 
 .create-account {
@@ -94,6 +113,11 @@ html body {
 
     }
 
+    .password{
+        font-size: 50%;
+        border: 1px solid black;
+    }
+
     .sign-up-btn {
         font-size: 50%;
         padding: 6px 16px;
@@ -126,6 +150,11 @@ html body {
         font-size: 50%;
         border: 1px solid black;
 
+    }
+
+    .password{
+        font-size: 50%;
+        border: 1px solid black;
     }
 
     .sign-up-btn {
@@ -162,6 +191,11 @@ html body {
 
     }
 
+    .password{
+        font-size: 50%;
+        border: 1px solid black;
+    }
+
     .sign-up-btn {
         font-size: 50%;
         padding: 6px 16px;
@@ -195,6 +229,11 @@ html body {
 
     }
 
+    .password{
+        font-size: 50%;
+        border: 1px solid black;
+    }
+
     .sign-up-btn {
         font-size: 50%;
         padding: 6px 16px;
@@ -217,12 +256,17 @@ html body {
         font-size: 100%;
     }
 
-    
+
 
     .email {
         font-size: 50%;
         border: 1px solid black;
 
+    }
+
+    .password{
+        font-size: 50%;
+        border: 1px solid black;
     }
 
     .sign-up-btn {

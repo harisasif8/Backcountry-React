@@ -13,6 +13,7 @@ import { CartProvider } from 'contexts/CartContext'
 import Cart from 'components/Cart';
 import SignUp from 'components/SignUp';
 import SignIn from 'components/SignIn';
+import { UserProvider } from 'contexts/UserContext';
 
 
 
@@ -22,21 +23,24 @@ function App() {
 
   return (
     <div>
-      <SignUp />
-      {/* <SignIn/> */}
-      <Router>
-        <ProductProvider>
-          <CartProvider>
-            {/* <Header />
+      <UserProvider>
+        {/* <SignUp /> */}
+        <SignIn/>
+        <Router>
+          <ProductProvider>
+            <CartProvider>
+              {/* <Header />
             <Routes>
               <Route exact path="products"
                 element={<ProductListing />} />
               <Route exact path="cart"
                 element={<Cart />} />
             </Routes> */}
-          </CartProvider>
-        </ProductProvider>
-      </Router>
+            </CartProvider>
+          </ProductProvider>
+        </Router>
+      </UserProvider>
+
     </div>
 
   );
