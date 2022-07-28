@@ -1,39 +1,46 @@
-import { useContext } from "react";
+import { useContext, useState, useReducer } from "react";
 import { UserContext, USER } from "contexts/UserContext";
 import { getItemFromLS } from "helper/utility/LSitems";
-import getUserData from "helper/utility/getUserData";
-import { SIGN_UP } from "reducers/userReducer";
+import { SIGN_UP } from "reducers/UserReducer";
+import { Link } from "react-router-dom";
+import AuthReducer, { INITIAL_STATE, SET_USER } from "reducers/AuthReducer";
 
 const SignUp = () => {
     const userFromLS = getItemFromLS(USER) || '[]';
     let parsedUserFromLS = JSON.parse(userFromLS);
 
+    const [{ signingUpUser }, dispatchSignUpUser] = useReducer(AuthReducer, INITIAL_STATE);
+    const [repeatedUser, setRepeatedUser] = useState('')
     const [{ users }, dispatch] = useContext(UserContext)
+    console.log('signingUpUser', signingUpUser);
+
+    const handleInput = (e) => {
+        dispatchSignUpUser({
+            type: SET_USER,
+            payload: { ...signingUpUser, [e.target.name]: e.target.value }
+        })
+    }
 
     const userSignUp = (e) => {
         e.preventDefault();
-        const fName = getUserData('fname');
-        const lName = getUserData('lname');
-        const email = getUserData('email');
-        const password = getUserData('pw');
-        const repeatedUser = document.getElementById('repeatedUser')
-        const isUserExist = users.find((user) => user.email === email)
-
+        const isUserExist = users.find((user) => user.email === signingUpUser.email)
+        console.log('isUserExist', isUserExist);
         if (isUserExist) {
-            repeatedUser.innerHTML = "This email already exists."
+            setRepeatedUser("This email already exists.")
         }
-
+ 
         else {
             const newUser = {
-                fName: fName,
-                lName: lName,
-                email: email,
-                password: password
+                fName: signingUpUser.fName,
+                lName: signingUpUser.lName,
+                email: signingUpUser.email,
+                password: signingUpUser.password
             }
-            dispatch({ type: SIGN_UP, payload: { users: [newUser] } })
+            console.log('newUser', newUser);
+            dispatch({ type: SIGN_UP, payload: { user: newUser } })
             parsedUserFromLS.push(newUser)
             localStorage.setItem(USER, JSON.stringify(parsedUserFromLS))
-            repeatedUser.innerHTML = '';
+            setRepeatedUser('');
             alert('Successfully signed up!')
         }
 
@@ -42,18 +49,18 @@ const SignUp = () => {
     console.log('users', users);
 
     return (
-        <div>
+        <div className="background">
             <form className="authentication-form" onSubmit={(event) => userSignUp(event)}>
                 <h4 className="create-account">Sign Up</h4>
                 <div className="authentication-name">
-                    <input type="text" id="fname" className="name" placeholder="First Name" required />
-                    <input type="text" id="lname" className="name" placeholder="Last Name" required />
+                    <input type="text" name="fName" value={signingUpUser.fName} className="name" placeholder="First Name" onChange={(event) => handleInput(event)} required />
+                    <input type="text" name="lName" value={signingUpUser.lName} className="name" placeholder="Last Name" onChange={(event) => handleInput(event)} required />
                 </div>
-                <input type="email" id="email" className="email" placeholder="Email" required />
-                <small id="repeatedUser" className="email-validation"></small>
-                <input type="password" id="pw" className="password" placeholder="Password" required />
+                <input type="email" name="email" value={signingUpUser.email} className="email" placeholder="Email" onChange={(event) => handleInput(event)} required />
+                <small name='repeatedUser' className="email-validation">{repeatedUser}</small>
+                <input type="password" name="password" value={signingUpUser.password} className="password" placeholder="Password" onChange={(event) => handleInput(event)} required />
                 <input type='submit' className="sign-up-btn" value={'Join Now'} />
-                <h6 className="sign-in">Already have an Account? <a>Sign In</a></h6>
+                <h6 className="sign-in">Already have an Account? <Link to={'signin'}>Sign In</Link></h6>
             </form>
         </div>
     )

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Drawer } from 'rsuite'
 import { CartContext, CART } from 'contexts/CartContext';
 import { getItemFromLS } from 'helper/utility/LSitems';
-import { REMOVE_FROM_CART } from 'reducers/cartReducer';
+import { REMOVE_FROM_CART } from 'reducers/CartReducer';
 
 
 const CartDrawer = ({ isDrawerOpen, onDrawerClose }) => {

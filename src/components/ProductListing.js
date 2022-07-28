@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, lazy } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { ShimmerPostList } from "react-shimmer-effects";
 import Product from './Product';
 import { ProductContext } from 'contexts/ProductContext'

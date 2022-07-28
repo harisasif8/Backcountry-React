@@ -1,5 +1,5 @@
 import { createContext, useReducer, useEffect } from "react";
-import UserReducer, { initialUserState, SIGN_UP } from "reducers/userReducer";
+import UserReducer, { FETCH_ALL_USERS, initialUserState, SIGN_UP } from "reducers/UserReducer";
 import { getItemFromLS } from "helper/utility/LSitems";
 
 
@@ -15,11 +15,10 @@ export const UserProvider = props => {
         const userFromLS = getItemFromLS(USER) || '[]';
         let parsedUserFromLS = JSON.parse(userFromLS)
         if (parsedUserFromLS.length) {
-            dispatch({ type: SIGN_UP, payload: { users: [...parsedUserFromLS] } })
+            console.log('parsedUserFromLS----', parsedUserFromLS);
+            dispatch({ type: FETCH_ALL_USERS, payload: { users: parsedUserFromLS } })
         }
-        console.log('parsedUserFromLS', parsedUserFromLS);
     }, []);
-
     return (
         <UserContext.Provider value={[state, dispatch]}>
             {props.children}

@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { CartContext, CART } from 'contexts/CartContext';
 import { getItemFromLS } from 'helper/utility/LSitems';
-import { REMOVE_FROM_CART, UPDATE_CART_QUANTITY } from 'reducers/cartReducer';
+import { REMOVE_FROM_CART, UPDATE_CART_QUANTITY } from 'reducers/CartReducer';
 
 
 

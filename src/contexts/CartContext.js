@@ -1,6 +1,6 @@
 import { createContext, useEffect, useReducer } from 'react';
 import { getItemFromLS } from 'helper/utility/LSitems'
-import cartReducer, { initialCartState, ADD_TO_CART } from 'reducers/cartReducer';
+import cartReducer, { initialCartState, ADD_TO_CART } from 'reducers/CartReducer';
 
 
 
@@ -18,7 +18,6 @@ export const CartProvider = props => {
         if (parsedCartItem.length) {
             dispatch({ type: ADD_TO_CART, payload: { cartData: [...parsedCartItem] } })
         }
-
     }, []);
 
     return (

@@ -5,7 +5,6 @@ export const FILTER_CART_ITEM = "FILTER_CART_ITEM";
 export const REMOVE_FROM_CART = "REMOVE-FROM-CART"
 export const UPDATE_CART_QUANTITY = "UPDATE_CART_QUANTITY"
 
-
 export const initialCartState = {
     cartData: [],
 }

@@ -31,7 +31,6 @@ export const ProductProvider = props => {
                 setProductData({ ...productData, isProductLoading: false })
             }
         };
-
         getData();
     }, [searchTerm]);
 

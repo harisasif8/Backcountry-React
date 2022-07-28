@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { CartContext, CART } from 'contexts/CartContext';
-import {  ADD_TO_CART, REMOVE_FROM_CART } from 'reducers/cartReducer';
+import {  ADD_TO_CART, REMOVE_FROM_CART } from 'reducers/CartReducer';
 import { getItemFromLS } from 'helper/utility/LSitems';
 
 
