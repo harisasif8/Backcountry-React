@@ -14,6 +14,7 @@ import Cart from 'components/Cart';
 import SignUp from 'components/SignUp';
 import SignIn from 'components/SignIn';
 import { UserProvider } from 'contexts/UserContext';
+import ProtectedRoute from 'components/routes/ProtectedRoute';
 
 function App() {
 
@@ -23,16 +24,12 @@ function App() {
         <Router>
           <ProductProvider>
             <CartProvider>
-              {/* <Header /> */}
+              <Header />
               <Routes>
-                <Route exact path="signup"
-                  element={<SignUp />} />
-                <Route exact path="signin"
-                  element={<SignIn />} />
-                <Route exact path="products"
-                  element={<ProductListing />} />
-                <Route exact path="cart"
-                  element={<Cart />} />
+                <Route exact path="signup" element={<SignUp /> } />
+                <Route exact path="signin" element={<SignIn />} />
+                <Route exact path="cart" element={<Cart />} />
+                <Route exact path="products" element={<ProtectedRoute><ProductListing /></ProtectedRoute>} />
               </Routes>
             </CartProvider>
           </ProductProvider>

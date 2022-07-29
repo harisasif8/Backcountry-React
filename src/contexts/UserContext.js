@@ -15,7 +15,6 @@ export const UserProvider = props => {
         const userFromLS = getItemFromLS(USER) || '[]';
         let parsedUserFromLS = JSON.parse(userFromLS)
         if (parsedUserFromLS.length) {
-            console.log('parsedUserFromLS----', parsedUserFromLS);
             dispatch({ type: FETCH_ALL_USERS, payload: { users: parsedUserFromLS } })
         }
     }, []);

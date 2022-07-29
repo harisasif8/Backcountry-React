@@ -10,11 +10,11 @@ const SignIn = () => {
     const parsedLoggedInUser = JSON.parse(loggedInUserFromLS);
 
     const [{ loginUser }, dispatchLoginUser] = useReducer(AuthReducer, INITIAL_STATE);
-    console.log('loginUser', loginUser);
-    const [{ users, loggedInUser }, dispatch] = useContext(UserContext)
+    const [{ users, isLoggedIn }, dispatch] = useContext(UserContext)
+    console.log('isLoggedIn', isLoggedIn);
+
+
     const [validCredentials, setValidCredentials] = useState('')
-    console.log('users', users);
-    console.log('here in sign in page');
 
     const handleInput = (e) => {
         dispatchLoginUser({ type: LOGIN_USER, payload: { ...loginUser, [e.target.name]: e.target.value } })
@@ -23,12 +23,12 @@ const SignIn = () => {
     const userSignIn = (e) => {
         e.preventDefault()
         const isUserRegistered = users.find((user) => loginUser.email === user.email && loginUser.password === user.password)
-        console.log('isUserRegistered', isUserRegistered);
         if (isUserRegistered) {
-            dispatch({ type: SIGN_IN, payload: { loggedInUser: [isUserRegistered] } })
+            dispatch({ type: SIGN_IN, payload: { loggedInUser: [isUserRegistered], loginStatus: true } })
             parsedLoggedInUser.push(isUserRegistered)
             localStorage.setItem(LOGGED_IN_USER, JSON.stringify(parsedLoggedInUser))
             alert('Successfully logged In')
+            console.log('isLoggedIn', isLoggedIn);
         }
         else {
             setValidCredentials('Invalid Credentials')

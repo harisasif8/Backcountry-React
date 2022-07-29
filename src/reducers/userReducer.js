@@ -6,10 +6,15 @@ export const FETCH_ALL_USERS = 'FETCH_ALL_USERS'
 
 export const initialUserState = {
     users: [],
-    loggedInUser: []
+    loggedInUser: [],
+    isLoggedIn: false
 }
+console.log('isLoggedIn in user reducer', initialUserState.isLoggedIn);
+console.log('isLoggedIn in user reducer', initialUserState.isLoggedIn);
+
 
 const UserReducer = (state, action) => {
+
     const { type, payload } = action;
 
     switch (type) {
@@ -21,7 +26,8 @@ const UserReducer = (state, action) => {
         case SIGN_IN:
             return {
                 ...state,
-                loggedInUser: payload.loggedInUser
+                loggedInUser: payload.loggedInUser,
+                isLoggedIn: payload.loginStatus
             }
         case FETCH_ALL_USERS:
             return {
