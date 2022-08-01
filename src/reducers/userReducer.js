@@ -7,11 +7,7 @@ export const FETCH_ALL_USERS = 'FETCH_ALL_USERS'
 export const initialUserState = {
     users: [],
     loggedInUser: [],
-    isLoggedIn: false
 }
-console.log('isLoggedIn in user reducer', initialUserState.isLoggedIn);
-console.log('isLoggedIn in user reducer', initialUserState.isLoggedIn);
-
 
 const UserReducer = (state, action) => {
 
@@ -27,7 +23,6 @@ const UserReducer = (state, action) => {
             return {
                 ...state,
                 loggedInUser: payload.loggedInUser,
-                isLoggedIn: payload.loginStatus
             }
         case FETCH_ALL_USERS:
             return {
@@ -38,6 +33,7 @@ const UserReducer = (state, action) => {
         default:
             throw new Error('No case for type')
     }
+
 }
 
 export default UserReducer;

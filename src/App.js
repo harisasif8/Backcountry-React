@@ -14,7 +14,8 @@ import Cart from 'components/Cart';
 import SignUp from 'components/SignUp';
 import SignIn from 'components/SignIn';
 import { UserProvider } from 'contexts/UserContext';
-import ProtectedRoute from 'components/routes/ProtectedRoute';
+import ProtectedRoute from 'components/routes/ProtectedRoute'
+import PublicRoute from 'components/routes/PublicRoute';
 
 function App() {
 
@@ -26,16 +27,15 @@ function App() {
             <CartProvider>
               <Header />
               <Routes>
-                <Route exact path="signup" element={<SignUp /> } />
-                <Route exact path="signin" element={<SignIn />} />
-                <Route exact path="cart" element={<Cart />} />
+                <Route exact path="signup" element={<SignUp />} />
+                <Route exact path="signin" element={<PublicRoute><SignIn /></PublicRoute>} />
                 <Route exact path="products" element={<ProtectedRoute><ProductListing /></ProtectedRoute>} />
+                <Route exact path="cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
               </Routes>
             </CartProvider>
           </ProductProvider>
         </Router>
       </UserProvider>
-
     </div>
 
   );

@@ -5,22 +5,29 @@ import { faSearch, faComments, faPhone, faUserCircle, faShoppingCart } from '@fo
 import { useNavigate } from 'react-router-dom';
 import UseQuery from '../hooks/UseQuery';
 import { Link } from "react-router-dom";
-
+import { getItemFromLS } from "helper/utility/LSitems";
+import { LOGGED_IN_USER } from "contexts/UserContext";
 
 
 const Header = () => {
 
+    const loggedInUserFromLS = getItemFromLS(LOGGED_IN_USER) || '[]'
+    const parsedLoggedInUser = JSON.parse(loggedInUserFromLS);
+
     const query = UseQuery();
     const searchTerm = query.get('search');
-
     const [searchValue, setSearchValue] = useState(searchTerm);
     const navigate = useNavigate();
-
 
     const searchProduct = (event) => {
         event.preventDefault();
         setSearchValue(searchValue)
         navigate(`products?search=${searchValue}`);
+    }
+
+    const logOut = () => {
+        localStorage.removeItem(LOGGED_IN_USER)
+        navigate('signin')
     }
 
     return (
@@ -46,16 +53,13 @@ const Header = () => {
                         <button className='icon-btn'> <i><FontAwesomeIcon icon={faPhone} /><u> 1-800-409-4502</u></i></button>
                     </div>
                     <div className='user-icon'>
-                        <Link to={'signup'}>
-                            <button className='icon-btn'> <i><FontAwesomeIcon icon={faUserCircle} />My Account</i></button>
-                        </Link>
+                        {parsedLoggedInUser.length ? <button className='icon-btn' onClick={logOut} > <i><FontAwesomeIcon icon={faUserCircle} />Logout </i></button> : null}
                     </div>
                     <div className='cart-icon'>
                         <Link to={"cart"}>
                             <button className='icon-btn'> <i><FontAwesomeIcon icon={faShoppingCart} /></i></button>
                         </Link>
                     </div>
-
                 </div>
                 <hr />
                 <div>

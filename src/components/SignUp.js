@@ -2,7 +2,7 @@ import { useContext, useState, useReducer } from "react";
 import { UserContext, USER } from "contexts/UserContext";
 import { getItemFromLS } from "helper/utility/LSitems";
 import { SIGN_UP } from "reducers/UserReducer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AuthReducer, { INITIAL_STATE, SET_USER } from "reducers/AuthReducer";
 
 const SignUp = () => {
@@ -12,7 +12,8 @@ const SignUp = () => {
     const [{ signingUpUser }, dispatchSignUpUser] = useReducer(AuthReducer, INITIAL_STATE);
     const [repeatedUser, setRepeatedUser] = useState('')
     const [{ users }, dispatch] = useContext(UserContext)
-    console.log('signingUpUser', signingUpUser);
+    const navigate = useNavigate();
+
 
     const handleInput = (e) => {
         dispatchSignUpUser({
@@ -24,11 +25,9 @@ const SignUp = () => {
     const userSignUp = (e) => {
         e.preventDefault();
         const isUserExist = users.find((user) => user.email === signingUpUser.email)
-        console.log('isUserExist', isUserExist);
         if (isUserExist) {
             setRepeatedUser("This email already exists.")
         }
- 
         else {
             const newUser = {
                 fName: signingUpUser.fName,
@@ -45,8 +44,6 @@ const SignUp = () => {
         }
 
     }
-    console.log('parsedUserFromLS', parsedUserFromLS);
-    console.log('users', users);
 
     return (
         <div className="background">
@@ -60,7 +57,7 @@ const SignUp = () => {
                 <small name='repeatedUser' className="email-validation">{repeatedUser}</small>
                 <input type="password" name="password" value={signingUpUser.password} className="password" placeholder="Password" onChange={(event) => handleInput(event)} required />
                 <input type='submit' className="sign-up-btn" value={'Join Now'} />
-                <h6 className="sign-in">Already have an Account? <Link to={'signin'}>Sign In</Link></h6>
+                <h6 className="sign-in">Already have an Account? <Link to={'/signin'}>Sign In</Link></h6>
             </form>
         </div>
     )

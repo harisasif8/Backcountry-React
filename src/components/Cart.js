@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { CartContext, CART } from 'contexts/CartContext';
 import { getItemFromLS } from 'helper/utility/LSitems';
 import { REMOVE_FROM_CART, UPDATE_CART_QUANTITY } from 'reducers/CartReducer';
+import { Link } from "react-router-dom";
 
 
 
@@ -12,11 +13,6 @@ const Cart = () => {
     let parsedCartItem = JSON.parse(cartItem)
 
     const [{ cartData }, dispatch] = useContext(CartContext)
-
-    if (cartData.length) {
-        const emptyCartContent = document.getElementById('empty-cart-contents')
-        emptyCartContent.textContent = ''
-    }
 
     const removeItemFromCart = (event, index) => {
         dispatch({ type: REMOVE_FROM_CART, payload: { deleteIndex: index } })
@@ -45,12 +41,10 @@ const Cart = () => {
 
         if (item.selectedQuantity <= 1) {
             decrementBtn.setAttribute('disabled', 'true')
-            console.log(decrementBtn)
         }
 
         else {
             decrementBtn.removeAttribute('disabled')
-            console.log(decrementBtn)
         }
     }
 
@@ -65,20 +59,22 @@ const Cart = () => {
                         <div>
                             <h4>Do you have saved items?</h4>
                             <h5>Sign in to purchase and manage items that you have saved in your cart or wish list.</h5>
-                            <button className="signin-shopping-button">Sign In</button>
+                            <Link to={'/signin'}> <button className="signin-shopping-button">Sign In</button></Link>
                         </div>
                         <div>
                             <h4>Want to shop?</h4>
                             <h5>This is the perfect opportunity to shop for the gear you've been wanting.</h5>
-                            <button className="signin-shopping-button">Continue Shopping</button>
+                            <Link to={'/products'}> <button className="signin-shopping-button">Continue Shopping</button></Link>
                         </div>
                     </div>
                 </div>
 
                 {cartData.map((filteredProduct, index) => {
                     const { id: productId, title: productTitle, productMainImage: { mediumImg: productImage }, productMainImage: { name: productColor }, selectedSize: productSize, activePrice: { maxListPrice: productPrice }, selectedQuantity: productQuantity } = filteredProduct;
+                    const emptyCartContent = document.getElementById('empty-cart-contents')
                     return (
                         <div className="ls-cart-contents" key={`cart-item-${productTitle}+${index}`}>
+                            {cartData.length ? emptyCartContent.textContent = '' : emptyCartContent.textContent = 'asd'}
                             <div className="cart-item-image-div">
                                 <img className="cart-item-image" src={`https://www.backcountry.com${productImage}`} alt="" />
                             </div>
