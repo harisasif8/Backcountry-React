@@ -15,7 +15,6 @@ export const ProductProvider = props => {
     const query = UseQuery();
     const searchTerm = query.get('search');
 
-
     useEffect(() => {
         const getData = async () => {
             try {
@@ -26,7 +25,7 @@ export const ProductProvider = props => {
                         ...(searchTerm ? { q: searchTerm } : { q: '' })
                     }
                 });
-                setProductData({ isProductLoading: false, products: response?.data?.products || [] })
+                setProductData({ isProductLoading: false, products: response?.data?.products })
             } catch (err) {
                 setProductData({ ...productData, isProductLoading: false })
             }

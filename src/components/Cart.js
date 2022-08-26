@@ -64,7 +64,7 @@ const Cart = () => {
                         <div>
                             <h4>Want to shop?</h4>
                             <h5>This is the perfect opportunity to shop for the gear you've been wanting.</h5>
-                            <Link to={'/products'}> <button className="signin-shopping-button">Continue Shopping</button></Link>
+                            <Link to={'/'}> <button className="signin-shopping-button">Continue Shopping</button></Link>
                         </div>
                     </div>
                 </div>

@@ -8,7 +8,7 @@ const PublicRoute = ({ children }) => {
     const loggedInUserFromLS = getItemFromLS(LOGGED_IN_USER) || '[]'
     const parsedLoggedInUser = JSON.parse(loggedInUserFromLS)
 
-    if (parsedLoggedInUser.length) return <Navigate to='/products' replace />
+    if (parsedLoggedInUser.length) return <Navigate to='/' replace />
 
     return children;
 };

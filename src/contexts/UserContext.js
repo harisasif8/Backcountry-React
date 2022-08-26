@@ -1,5 +1,5 @@
 import { createContext, useReducer, useEffect } from "react";
-import UserReducer, { FETCH_ALL_USERS, initialUserState, SIGN_UP } from "reducers/UserReducer";
+import UserReducer, { FETCH_ALL_USERS, initialUserState } from "reducers/UserReducer";
 import { getItemFromLS } from "helper/utility/LSitems";
 
 

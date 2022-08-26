@@ -14,7 +14,6 @@ const SignUp = () => {
     const [{ users }, dispatch] = useContext(UserContext)
     const navigate = useNavigate();
 
-
     const handleInput = (e) => {
         dispatchSignUpUser({
             type: SET_USER,

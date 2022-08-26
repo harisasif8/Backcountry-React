@@ -25,7 +25,7 @@ const SignIn = () => {
             dispatch({ type: SIGN_IN, payload: { loggedInUser: [isUserRegistered] } })
             parsedLoggedInUser.push(isUserRegistered)
             localStorage.setItem(LOGGED_IN_USER, JSON.stringify(parsedLoggedInUser))
-            navigate('/products')
+            navigate('/')
         }
         else {
             setValidCredentials('Invalid Credentials')
