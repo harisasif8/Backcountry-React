@@ -60,7 +60,9 @@ const Product = ({ product, onDrawerOpen }) => {
                             <i key={`${product.title}-rating-${ratingIndex}`} ><FontAwesomeIcon icon={faStar} /></i>)
                         )}
                     </p>
-                    <input type='button' onClick={(event) => AddToCartDrawer(event)} className='cart-button' value={cartBtnText}></input>
+                    {
+                        isAddedToCart ? <input type='button' onClick={(event) => AddToCartDrawer(event)} className='cart-button-red' value={cartBtnText}></input> : <input type='button' onClick={(event) => AddToCartDrawer(event)} className='cart-button' value={cartBtnText}></input>
+                    }
                 </div>
             </div>
         </div>

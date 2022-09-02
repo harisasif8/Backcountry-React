@@ -2,8 +2,6 @@ import { useState, createContext, useEffect } from 'react';
 import { fetcher } from '../utils/index';
 import UseQuery from '../hooks/UseQuery';
 
-
-
 export const ProductContext = createContext();
 
 export const ProductProvider = props => {

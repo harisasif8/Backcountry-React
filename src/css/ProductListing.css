@@ -84,6 +84,24 @@ h6 {
     color: white;
 }
 
+.cart-button-red {
+    background-color: white;
+    color: red;
+    transition-duration: 0.4s;
+    border-radius: 3px;
+    margin: 4px 2px;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 12px 32px;
+    cursor: pointer;
+    border: 2px solid black;
+}
+
+.cart-button-red:hover {
+background-color: red;
+    color: white;
+}
+
 .cart-product-img {
     width: 100%;
 }
@@ -113,9 +131,11 @@ h6 {
     display: block;
 }
 
-.ui-not-found {
-    display: grid;
-    place-items: center;
+.ui-not-found-div {
+    min-height: 800px;
+    text-align: center;
+    padding: 5rem 0;
+    background-color: #F8F9FA;
 }
 
 @media(max-width: 320px) {

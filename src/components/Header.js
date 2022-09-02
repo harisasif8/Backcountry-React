@@ -22,7 +22,7 @@ const Header = () => {
     const searchProduct = (event) => {
         event.preventDefault();
         setSearchValue(searchValue)
-        navigate(`products?search=${searchValue}`);
+        navigate(`?search=${searchValue}`);
     }
 
     const logOut = () => {
@@ -36,7 +36,7 @@ const Header = () => {
                 <div className='discount'> <a href="#" className='black-color'> Up To 50% Off 10,000+ Styles For Summer <u> Shop Now </u> </a> </div>
                 <div className='main-nav'>
                     <div>
-                        <Link to={'/products'}>
+                        <Link to={'/'}>
                             <img src={logo} className='bc-logo' alt="" />
                         </Link>
                     </div>
@@ -56,7 +56,7 @@ const Header = () => {
                         {parsedLoggedInUser.length ? <button className='icon-btn' onClick={logOut} > <i><FontAwesomeIcon icon={faUserCircle} />Logout </i></button> : null}
                     </div>
                     <div className='cart-icon'>
-                        <Link to={"cart"} target='_blank'>
+                        <Link to={"cart"}>
                             <button className='icon-btn'> <i><FontAwesomeIcon icon={faShoppingCart} /></i></button>
                         </Link>
                     </div>

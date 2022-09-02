@@ -31,9 +31,7 @@ const ProductListing = () => {
 
                 setFilteredProducts(filteredBcProducts)
             };
-
             searchItem()
-
         }, [debouncedText, products]
     );
     return (
@@ -43,10 +41,12 @@ const ProductListing = () => {
             </div>
             <div className="grid-container" id='productsListing'>
                 {isProductLoading ? <ShimmerPostList col={4} row={4} gap={30} className='loader' /> : filteredProducts.map((product) => <Product product={product} key={product.id} onDrawerOpen={setIsDrawerOpen} />)}
-                {!filteredProducts.length &&
-                    <h1 className='ui-not-found'>No Results Found</h1>
-                }
                 {isDrawerOpen && <CartDrawer isDrawerOpen={isDrawerOpen} onDrawerClose={setIsDrawerOpen} />}
+            </div>
+            <div>
+                {(filteredProducts.length === 0 && isProductLoading === false) &&
+                    <div className='ui-not-found-div'> <h1>No Results Found</h1></div>
+                }
             </div>
         </>
     );

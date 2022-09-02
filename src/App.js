@@ -30,7 +30,7 @@ function App() {
               <Routes>
                 <Route exact path="signup" element={<SignUp />} />
                 <Route exact path="signin" element={<PublicRoute><SignIn /></PublicRoute>} />
-                <Route exact path="products" element={<ProtectedRoute><ProductListing /></ProtectedRoute>} />
+                <Route exact path="" element={<ProtectedRoute><ProductListing /></ProtectedRoute>} />
                 <Route exact path="cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
               </Routes>
               <Footer />

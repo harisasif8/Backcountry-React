@@ -39,6 +39,7 @@ const SignUp = () => {
             localStorage.setItem(USER, JSON.stringify(parsedUserFromLS))
             setRepeatedUser('');
             alert('Successfully signed up!')
+            navigate('/signin')
         }
 
     }

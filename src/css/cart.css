@@ -9,7 +9,10 @@
 }
 
 .cart {
-    margin: 0px 25% 0 25%;
+    padding: 5% 25%;
+    background-color: #F8F9FA;
+
+
 }
 
 .signin-shopping-button {
