@@ -4,10 +4,6 @@ import { getItemFromLS } from 'helper/utility/LSitems';
 import { REMOVE_FROM_CART, UPDATE_CART_QUANTITY } from '../reducers/CartReducer';
 import { Link } from "react-router-dom";
 
-
-
-
-
 const Cart = () => {
     const cartItem = getItemFromLS(CART) || '[]';
     let parsedCartItem = JSON.parse(cartItem)
@@ -82,21 +78,22 @@ const Cart = () => {
                                 </div>
                             </div>
                         )
-                    }) : <div id="empty-cart-contents">
-                        <h2 className="">Your cart is currently empty.</h2>
-                        <div className="continue-shopping">
-                            <div>
-                                <h4>Do you have saved items?</h4>
-                                <h5>Sign in to purchase and manage items that you have saved in your cart or wish list.</h5>
-                                <Link to={'/signin'}> <button className="signin-shopping-button">Sign In</button></Link>
-                            </div>
-                            <div>
-                                <h4>Want to shop?</h4>
-                                <h5>This is the perfect opportunity to shop for the gear you've been wanting.</h5>
-                                <Link to={'/'}> <button className="signin-shopping-button">Continue Shopping</button></Link>
+                    }) :
+                        <div id="empty-cart-contents">
+                            <h2 className="currently-empty">Your cart is currently empty.</h2>
+                            <div className="continue-shopping">
+                                <div>
+                                    <h4>Do you have saved items?</h4>
+                                    <h5>Sign in to purchase and manage items that you have saved in your cart or wish list.</h5>
+                                    <Link to={'/signin'}> <button className="signin-shopping-button">Sign In</button></Link>
+                                </div>
+                                <div>
+                                    <h4>Want to shop?</h4>
+                                    <h5>This is the perfect opportunity to shop for the gear you've been wanting.</h5>
+                                    <Link to={'/'}> <button className="signin-shopping-button">Continue Shopping</button></Link>
+                                </div>
                             </div>
                         </div>
-                    </div>
                 }
             </div>
         </>
