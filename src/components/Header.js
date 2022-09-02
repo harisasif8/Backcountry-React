@@ -36,7 +36,7 @@ const Header = () => {
                 <div className='discount'> <a href="#" className='black-color'> Up To 50% Off 10,000+ Styles For Summer <u> Shop Now </u> </a> </div>
                 <div className='main-nav'>
                     <div>
-                        <Link to={'/'}>
+                        <Link to={'/products'}>
                             <img src={logo} className='bc-logo' alt="" />
                         </Link>
                     </div>

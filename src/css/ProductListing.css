@@ -113,6 +113,10 @@ h6 {
     display: block;
 }
 
+.ui-not-found {
+    display: grid;
+    place-items: center;
+}
 
 @media(max-width: 320px) {
 

@@ -13,8 +13,6 @@ const ProductListing = () => {
     const [searchText, setSearchText] = useState('');
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
-
-
     const debouncedText = UseDebounce(searchText, 500).toLowerCase();
 
     const query = UseQuery();
@@ -45,6 +43,9 @@ const ProductListing = () => {
             </div>
             <div className="grid-container" id='productsListing'>
                 {isProductLoading ? <ShimmerPostList col={4} row={4} gap={30} className='loader' /> : filteredProducts.map((product) => <Product product={product} key={product.id} onDrawerOpen={setIsDrawerOpen} />)}
+                {!filteredProducts.length &&
+                    <h1 className='ui-not-found'>No Results Found</h1>
+                }
                 {isDrawerOpen && <CartDrawer isDrawerOpen={isDrawerOpen} onDrawerClose={setIsDrawerOpen} />}
             </div>
         </>

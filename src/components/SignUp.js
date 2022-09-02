@@ -34,7 +34,6 @@ const SignUp = () => {
                 email: signingUpUser.email,
                 password: signingUpUser.password
             }
-            console.log('newUser', newUser);
             dispatch({ type: SIGN_UP, payload: { user: newUser } })
             parsedUserFromLS.push(newUser)
             localStorage.setItem(USER, JSON.stringify(parsedUserFromLS))
