@@ -35,7 +35,7 @@ const SignIn = () => {
     return (
         <div className="background">
             <form className="authentication-form" onSubmit={(event) => userSignIn(event)}>
-                <h4 className="create-account">Sign In</h4>
+                <h4 className="create-account">Sign In to view products</h4>
                 <input type="email" name="email" value={loginUser.email} className="email" placeholder="Email" onChange={(event) => handleInput(event)} required />
                 <small className="email-validation">{validCredentials}</small>
                 <input type="password" id="loginPw" name="password" value={loginUser.password} className="password" placeholder="Password" onChange={(event) => handleInput(event)} required />
