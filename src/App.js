@@ -1,7 +1,7 @@
 import React from 'react';
 import 'App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import 'css/ProductListing.css'
+import 'css/productListing.css'
 import 'css/general.css'
 import 'css/cart.css'
 import 'css/authentication.css'

@@ -48,7 +48,7 @@ const Cart = () => {
         <>
             <hr />
             <div className="cart">
-                <h1 className="Cart-heading black-color">My Cart</h1>
+                <h1 className="cart-heading black-color">My Cart</h1>
                 {
                     cartData.length ? cartData.map((filteredProduct, index) => {
                         const { id: productId, title: productTitle, productMainImage: { mediumImg: productImage }, productMainImage: { name: productColor }, selectedSize: productSize, activePrice: { maxListPrice: productPrice }, selectedQuantity: productQuantity } = filteredProduct;
@@ -84,12 +84,12 @@ const Cart = () => {
                             <div className="continue-shopping">
                                 <div>
                                     <h4>Do you have saved items?</h4>
-                                    <h5>Sign in to purchase and manage items that you have saved in your cart or wish list.</h5>
+                                    <h6>Sign in to purchase and manage items that you have saved in your cart or wish list.</h6>
                                     <Link to={'/signin'}> <button className="signin-shopping-button">Sign In</button></Link>
                                 </div>
                                 <div>
                                     <h4>Want to shop?</h4>
-                                    <h5>This is the perfect opportunity to shop for the gear you've been wanting.</h5>
+                                    <h6>This is the perfect opportunity to shop for the gear you've been wanting.</h6>
                                     <Link to={'/'}> <button className="signin-shopping-button">Continue Shopping</button></Link>
                                 </div>
                             </div>

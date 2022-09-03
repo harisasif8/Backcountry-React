@@ -24,7 +24,9 @@ const CartDrawer = ({ isDrawerOpen, onDrawerClose }) => {
             backdrop={true}
             open={isDrawerOpen}
             onClose={() => onDrawerClose(false)}
-
+            enforceFocus={false}
+            autoFocus={false}
+            full={true}
         >
             <Drawer.Header>
                 <Drawer.Title> <h3>Cart</h3> </Drawer.Title>

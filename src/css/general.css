@@ -162,7 +162,6 @@ hr {
     text-decoration: underline;
 }
 
-
 @media(max-width: 950px) {
     .ui-search-input{
         width: 60%;
